@@ -1,6 +1,8 @@
-Miniscript Template: 1
-Title: 3 Key Time Layered Multisig
-Created: 2023-09-11
+<pre>
+  Miniscript Template: 1
+  Title: 3 Key Time Layered Multisig
+  Created: 2023-09-11
+</pre>
 
 =Name of Template=
 
