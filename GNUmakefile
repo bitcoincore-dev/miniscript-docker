@@ -87,7 +87,7 @@ serve:
 README:
 	command -v pandoc >/dev/null 2>&1 && \
 		pandoc --preserve-tabs --ascii --from=markdown --to=html $@.md | \
-		sed 's/__NOTOC__//' > index.2.html || command -v docker && docker pull pandoc/latex:2.6 && \
+		sed 's/__NOTOC__//' > index.html || command -v docker && docker pull pandoc/latex:2.6 && \
 		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md
 	 
 	## @type -P pandoc >/tmp/miniscript-template.log && \
