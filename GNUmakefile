@@ -143,6 +143,9 @@ else
 	@type brew && brew install --cask docker
 endif
 
+submodules:## submodules
+	git submodule update --init --recursive
+
 .PHONY:$(TEMPLATES) serve
 
 -include docker.mk
