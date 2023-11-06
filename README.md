@@ -1,5 +1,5 @@
-[![Miniscript Templates (MinT)
-](https://avatars.githubusercontent.com/u/7424983?s=50) **Miniscript-templates** ](https://github.com/Blockstream/miniscript-templates)
+[![miniscript templates (MinT)
+](https://avatars.githubusercontent.com/u/7424983?s=15) **miniscript-templates** ](https://github.com/Blockstream/miniscript-templates)
 
 
 <center>
