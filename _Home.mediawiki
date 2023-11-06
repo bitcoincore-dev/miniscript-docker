@@ -1,0 +1,10 @@
+{| class="wikitable sortable" style="width: auto; text-align: center; font-size: smaller; table-layout: fixed;"
+|- style="background-color: #ffcfcf"
+| [[MinT-000]]
+| [[MinT-001]]
+| [[MinT-002]]
+| [[MinT-003]]
+| [[MinT-004]]
+|}
+
+__NOTOC__

@@ -1,12 +1,25 @@
+[![Miniscript Templates (MinT)
+](https://avatars.githubusercontent.com/u/7424983?s=50) **Miniscript-templates** ](https://github.com/Blockstream/miniscript-templates)
 
-## Miniscript Templates (MinT)
+
+<center>
+
+|[MinT-000](MinT-000.md)|[MinT-001](MinT-001.md)|[MinT-002](MinT-002.md)|[MinT-003](MinT-003.md)|[MinT-004](MinT-004.md)|
+|----------|----------|----------|----------|----------|
+
+
+|[MinT-005](MinT-005.md)|[MinT-006](MinT-006.md)|[MinT-007](MinT-007.md)|[MinT-008](MinT-008.md)|[MinT-009](MinT-009.md)|
+|----------|----------|----------|----------|----------|
+
+
+</center>
 
 ## About
 
 [Miniscript](https://bitcoin.sipa.be/miniscript/) is a language for
 composing Bitcoin [Script](https://en.bitcoin.it/wiki/Script) in a
 structured way, facilitating analysis, composition, and generic signing.
-It's a simplified, composable subset of the Bitcoin
+It\'s a simplified, composable subset of the Bitcoin
 [Script](https://en.bitcoin.it/wiki/Script) language. Developed to
 overcome limitations in writing complex spending conditions directly in
 Bitcoin [Script](https://en.bitcoin.it/wiki/Script), it enables formal
@@ -15,50 +28,57 @@ verification and offers a more human-friendly interface.
 ## Objective
 
 1.  Each MinT provides an example of a common miniscript implementation.
-2. Each MinT is provided as is. While care is taken to ensure a high degree of quality. Developers and enthusiasts assume full responsibility for their usage[^use-at-your-own-risk]. 
-1.  Have reviewed templates that leverage Miniscript to assure there are
+2.  Each MinT is provided as is. While care is taken to ensure a high degree of quality. Developers and enthusiasts assume full responsibility for their usage[^use-at-your-own-risk].
+
+3.  Have reviewed templates that leverage Miniscript to assure there are
     not unintended ways of executing a valid spend beyond the intended
     [Miniscript](https://raw.githubusercontent.com/bitcoin/bitcoin/master/src/script/miniscript.h)
     policy.
 
-1.  Have standardized usages of Miniscript to streamline software and
+4.  Have standardized usages of Miniscript to streamline software and
     hardware wallet integrations.
 
-1.  Have uniform on-chain usage of Miniscript templates for better
+5.  Have uniform on-chain usage of Miniscript templates for better
     privacy.
 
-<HR>
-
 <H2>
+
 Submission Format
 
 </H2>
 
 ### Name of Template
 
-#### MinT-###-\<description\>
+Proposed Timelock Usage
 
-### Policy Description
+### Goal to be achieved by template
 
-A 3-of-3 multisig quorum that **transitions** to a 2-of-3 after 90 days[^three-of-three]
+A 3-of-3 that turns into a 2-of-3 after 90 days
 
-### Policy Implementation
+`   NOTE: 144 blocks per day x 90 days = 12960 blocks`
 
-Input[^2]:
-> thresh(3, pk(key_1), pk(key_2), pk(key_3), older(12960))
+### Miniscript Policy
 
-Output[^3]:
-> thresh(3, pk(key_1), s:pk(key_2), s:pk(key_3), sln:older(12960))
+Input:
 
-A fragment note[^4].
+    thresh(3, pk(key_1), pk(key_2), pk(key_3), older(12960))
 
-> s:X	SWAP [X]	
-> n:X	[X] 0NOTEQUAL	
-> l:X = or_i(0,X)	IF 0 ELSE [X] ENDIF
+Output:
 
-A footnote[^6].
+    thresh(3, pk(key_1), s:pk(key_2), s:pk(key_3), sln:older(12960))
 
-Resulting Bitcoin Script structure[^7].
+    Spending cost analysis
+
+    Script: 122 WU
+    Input: 166.250000 WU
+    Total: 288.250000 WU
+
+<h4>
+
+Resulting Bitcoin Script structure
+
+</h4>
+
 
     <key_1> OP_CHECKSIG OP_SWAP <key_2> OP_CHECKSIG OP_ADD OP_SWAP <key_3>
     OP_CHECKSIG OP_ADD OP_SWAP OP_IF
@@ -68,19 +88,10 @@ Resulting Bitcoin Script structure[^7].
     OP_ENDIF
     OP_ADD 3 OP_EQUAL
 
-Spending cost analysis[^5]:
+[testnet
+tx](https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769)
 
-> Script: 122 WU	
-> Input: 166.250000 WU	
-> Total: 288.250000 WU	
-
-### Reference Tx
-
-###### Provide a reference transaction so behavior and outcomes can be verified.
-
-TxID:
-
-[testnet](https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769):[13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769](https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769)
+`   `[`https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769`](https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769)
 
 ### Additional Links
 
@@ -90,33 +101,18 @@ example](https://github.com/sipa/miniscript/blob/master/bitcoin/script/miniscrip
 ### Additional Resources
 
 [
-github.com/sipa/miniscript/tree/master](https://github.com/sipa/miniscript/tree/master "wikilink")
+github.com/sipa/miniscript/tree/master](https://github.com/sipa/miniscript/tree/master )
 
 [
-bitcoin.sipa.be/miniscript](https://bitcoin.sipa.be/miniscript "wikilink")
+bitcoin.sipa.be/miniscript](https://bitcoin.sipa.be/miniscript )
 
-===
+<details>
+<summary>Additional Links</summary>
+<p>
 
-[^three-of-three]: `144 blocks per day x 90 days = 12960 blocks`	additonal info here: [miniscript.h](https://github.com/bitcoin/bitcoin/blob/d9007f51a7480246abe4c16f2e3d190988470bec/src/script/miniscript.h#L199)
-  
-[^2]: `nSequence ≥ n > 0` (add link)
-  `older(NUM) ~> <NUM> CHECKSEQUENCEVERIFY`
-  	additonal info here: [miniscript.h](https://github.com/bitcoin/bitcoin/blob/d9007f51a7480246abe4c16f2e3d190988470bec/src/script/miniscript.h#L172)
+#### Blockstream/miniscript-templates:
 
-[^3]: `nLockTime ≥ n > 0` (add link)
-  `after(NUM) ~> <NUM> CHECKLOCKTIMEVERIFY`
-   additonal info here: [miniscript.h](https://github.com/bitcoin/bitcoin/blob/d9007f51a7480246abe4c16f2e3d190988470bec/src/script/miniscript.h#L172)
+[![Additional Link](https://avatars.githubusercontent.com/u/7424983?s=100)](https://github.com/Blockstream/miniscript-templates)
 
-[^4]: Given a script, be able to predict the cost of spending an output.
-  
-  
-[^5]: "s" Signed: satisfying this expression always requires a signature (predicting whether all satisfactions will be HASSIG).
-[^6]: "f" Forced: dissatisfying this expression always requires a signature (predicting whether all dissatisfactions will be HASSIG).
-[^7]: "e" Expressive: this requires a unique unconditional dissatisfaction to exist, and forces all conditional dissatisfactions (if any) to require a signature.
-
-[^use-at-your-own-risk]: Use at your own risk.
-
-
-<!--
-\_\_NOTOC\_\_
--->
+</p>
+</details>

@@ -58,11 +58,19 @@ endif
 ## 5. Submit pull request
 
 TEMPLATES:=\
-MinT-000-Timelocks-in-Templates \
-MinT-001-3-Key-Time-Layered-Multisig \
-MinT-002-5-Time-Layered-Multisig \
-MinT-003-Multi-Institutional-Custody-One-Agent \
-MinT-004-Multi-Institutional-Custody-Two-Agents \
+MinT-000 \
+MinT-001 \
+MinT-002 \
+MinT-003 \
+MinT-004 \
+
+TEMPLATES_MD:=\
+README.md \
+MinT-000.md \
+MinT-001.md \
+MinT-002.md \
+MinT-003.md \
+MinT-004.md \
 
 .PHONY:-
 -:
@@ -70,7 +78,7 @@ MinT-004-Multi-Institutional-Custody-Two-Agents \
 	@echo
 more:## 	more help
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/	/'
-all:README $(TEMPLATES)## 	make README $(TEMPLATES) Mint-**
+all:README $(TEMPLATES) $(TEMPLATES_MD)## 	make README $(TEMPLATES) Mint-**
 #$(MAKE) -f Makefile help
 serve:## 	serve
 	@. serve 2>/tmp/serve.log
@@ -116,6 +124,12 @@ $(TEMPLATES).%:## 	$(TEMPLATES)
 		pandoc --preserve-tabs --ascii --from=mediawiki --to=html $@.mediawiki | \
 		sed 's/__NOTOC__//' > $@.html || command -v docker 2>/dev/null && docker pull pandoc/latex:2.6 && \
 		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.mediawiki
+
+$(TEMPLATES_MD).%:## 	$(TEMPLATES_MD)
+	@command -v pandoc >/dev/null 2>&1 && \
+		pandoc --preserve-tabs --ascii --from=markdown --to=html $@.md | \
+		sed 's/__NOTOC__//' > $@.html || command -v docker 2>/dev/null && docker pull pandoc/latex:2.6 && \
+		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md
 
 
 .PHONY: report

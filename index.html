@@ -1,9 +1,42 @@
-<h2 id="miniscript-templates-mint">Miniscript Templates (MinT)</h2>
+<p><a href="https://github.com/Blockstream/miniscript-templates"><img
+src="https://avatars.githubusercontent.com/u/7424983?s=20"
+alt="Miniscript Templates (MinT)" />
+<strong>Miniscript-templates</strong></a></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+<th><!-- --></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="MinT-000.md">MinT-000</a></td>
+<td><a href="MinT-001.md">MinT-001</a></td>
+<td><a href="MinT-002.md">MinT-002</a></td>
+<td><a href="MinT-003.md">MinT-003</a></td>
+<td><a href="MinT-004.md">MinT-004</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="about">About</h2>
 <p><a href="https://bitcoin.sipa.be/miniscript/">Miniscript</a> is a
 language for composing Bitcoin <a
 href="https://en.bitcoin.it/wiki/Script">Script</a> in a structured way,
-facilitating analysis, composition, and generic signing. It&#x2019;s a
+facilitating analysis, composition, and generic signing. It's a
 simplified, composable subset of the Bitcoin <a
 href="https://en.bitcoin.it/wiki/Script">Script</a> language. Developed
 to overcome limitations in writing complex spending conditions directly
@@ -16,8 +49,7 @@ interface.</p>
 implementation.</p></li>
 <li><p>Each MinT is provided as is. While care is taken to ensure a high
 degree of quality. Developers and enthusiasts assume full responsibility
-for their usage<a href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a>.</p></li>
+for their usage[^use-at-your-own-risk].</p></li>
 <li><p>Have reviewed templates that leverage Miniscript to assure there
 are not unintended ways of executing a valid spend beyond the intended
 <a
@@ -28,33 +60,29 @@ hardware wallet integrations.</p></li>
 <li><p>Have uniform on-chain usage of Miniscript templates for better
 privacy.</p></li>
 </ol>
-<HR>
 <H2>
 <p>Submission Format</p>
 </H2>
 <h3 id="name-of-template">Name of Template</h3>
-<h4 id="mint--description">MinT-###-&lt;description&gt;</h4>
-<h3 id="policy-description">Policy Description</h3>
-<p>A 3-of-3 multisig quorum that <strong>transitions</strong> to a
-2-of-3 after 90 days<a href="#fn2" class="footnote-ref" id="fnref2"
-role="doc-noteref"><sup>2</sup></a></p>
-<h3 id="policy-implementation">Policy Implementation</h3>
-<p>Input<a href="#fn3" class="footnote-ref" id="fnref3"
-role="doc-noteref"><sup>3</sup></a>: &gt; thresh(3, pk(key_1),
-pk(key_2), pk(key_3), older(12960))</p>
-<p>Output<a href="#fn4" class="footnote-ref" id="fnref4"
-role="doc-noteref"><sup>4</sup></a>: &gt; thresh(3, pk(key_1),
-s:pk(key_2), s:pk(key_3), sln:older(12960))</p>
-<p>A fragment note<a href="#fn5" class="footnote-ref" id="fnref5"
-role="doc-noteref"><sup>5</sup></a>.</p>
-<blockquote>
-<p>s:X SWAP [X] n:X [X] 0NOTEQUAL l:X = or_i(0,X) IF 0 ELSE [X]
-ENDIF</p>
-</blockquote>
-<p>A footnote<a href="#fn6" class="footnote-ref" id="fnref6"
-role="doc-noteref"><sup>6</sup></a>.</p>
-<p>Resulting Bitcoin Script structure<a href="#fn7" class="footnote-ref"
-id="fnref7" role="doc-noteref"><sup>7</sup></a>.</p>
+<p>Proposed Timelock Usage</p>
+<h3 id="goal-to-be-achieved-by-template">Goal to be achieved by
+template</h3>
+<p>A 3-of-3 that turns into a 2-of-3 after 90 days</p>
+<p><code>&#xA0;&#xA0;&#xA0;NOTE:&#xA0;144&#xA0;blocks&#xA0;per&#xA0;day&#xA0;x&#xA0;90&#xA0;days&#xA0;=&#xA0;12960&#xA0;blocks</code></p>
+<h3 id="miniscript-policy">Miniscript Policy</h3>
+<p>Input:</p>
+<pre><code>thresh(3, pk(key_1), pk(key_2), pk(key_3), older(12960))</code></pre>
+<p>Output:</p>
+<pre><code>thresh(3, pk(key_1), s:pk(key_2), s:pk(key_3), sln:older(12960))
+
+Spending cost analysis
+
+Script: 122 WU
+Input: 166.250000 WU
+Total: 288.250000 WU</code></pre>
+<h4>
+<p>Resulting Bitcoin Script structure</p>
+</h4>
 <pre><code>&lt;key_1&gt; OP_CHECKSIG OP_SWAP &lt;key_2&gt; OP_CHECKSIG OP_ADD OP_SWAP &lt;key_3&gt;
 OP_CHECKSIG OP_ADD OP_SWAP OP_IF
   0
@@ -62,65 +90,29 @@ OP_ELSE
   &lt;a032&gt; OP_CHECKSEQUENCEVERIFY OP_0NOTEQUAL
 OP_ENDIF
 OP_ADD 3 OP_EQUAL</code></pre>
-<p>Spending cost analysis<a href="#fn8" class="footnote-ref" id="fnref8"
-role="doc-noteref"><sup>8</sup></a>:</p>
-<blockquote>
-<p>Script: 122 WU Input: 166.250000 WU Total: 288.250000 WU</p>
-</blockquote>
-<h3 id="reference-tx">Reference Tx</h3>
-<h6
-id="provide-a-reference-transaction-so-behavior-and-outcomes-can-be-verified.">Provide
-a reference transaction so behavior and outcomes can be verified.</h6>
-<p>TxID:</p>
 <p><a
-href="https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769">testnet</a>:<a
-href="https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769">13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769</a></p>
+href="https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769">testnet
+tx</a></p>
+<p><code>&#xA0;&#xA0;&#xA0;</code><a
+href="https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769"><code>https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769</code></a></p>
 <h3 id="additional-links">Additional Links</h3>
 <p><a
 href="https://github.com/sipa/miniscript/blob/master/bitcoin/script/miniscript.h">usage
 example</a></p>
 <h3 id="additional-resources">Additional Resources</h3>
-<p><a href="https://github.com/sipa/miniscript/tree/master"
-title="wikilink">github.com/sipa/miniscript/tree/master</a></p>
-<p><a href="https://bitcoin.sipa.be/miniscript"
-title="wikilink">bitcoin.sipa.be/miniscript</a></p>
-<p>===</p>
-<!--
-\_\_NOTOC\_\_
--->
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Use at your own risk.<a href="#fnref1"
-class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
-<li id="fn2"><p><code>144&#xA0;blocks&#xA0;per&#xA0;day&#xA0;x&#xA0;90&#xA0;days&#xA0;=&#xA0;12960&#xA0;blocks</code>
-additonal info here: <a
-href="https://github.com/bitcoin/bitcoin/blob/d9007f51a7480246abe4c16f2e3d190988470bec/src/script/miniscript.h#L199">miniscript.h</a><a
-href="#fnref2" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
-<li id="fn3"><p><code>nSequence &#x2265; n &gt; 0</code> (add link)
-<code>older(NUM) ~&gt; &lt;NUM&gt; CHECKSEQUENCEVERIFY</code> additonal
-info here: <a
-href="https://github.com/bitcoin/bitcoin/blob/d9007f51a7480246abe4c16f2e3d190988470bec/src/script/miniscript.h#L172">miniscript.h</a><a
-href="#fnref3" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
-<li id="fn4"><p><code>nLockTime &#x2265; n &gt; 0</code> (add link)
-<code>after(NUM) ~&gt; &lt;NUM&gt; CHECKLOCKTIMEVERIFY</code> additonal
-info here: <a
-href="https://github.com/bitcoin/bitcoin/blob/d9007f51a7480246abe4c16f2e3d190988470bec/src/script/miniscript.h#L172">miniscript.h</a><a
-href="#fnref4" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
-<li id="fn5"><p>Given a script, be able to predict the cost of spending
-an output.<a href="#fnref5" class="footnote-back"
-role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
-<li id="fn6"><p>&#x201C;f&#x201D; Forced: dissatisfying this expression always
-requires a signature (predicting whether all dissatisfactions will be
-HASSIG).<a href="#fnref6" class="footnote-back"
-role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
-<li id="fn7"><p>&#x201C;e&#x201D; Expressive: this requires a unique unconditional
-dissatisfaction to exist, and forces all conditional dissatisfactions
-(if any) to require a signature.<a href="#fnref7" class="footnote-back"
-role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
-<li id="fn8"><p>&#x201C;s&#x201D; Signed: satisfying this expression always requires a
-signature (predicting whether all satisfactions will be HASSIG).<a
-href="#fnref8" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
-</ol>
-</section>
+<p><a
+href="https://github.com/sipa/miniscript/tree/master">github.com/sipa/miniscript/tree/master</a></p>
+<p><a
+href="https://bitcoin.sipa.be/miniscript">bitcoin.sipa.be/miniscript</a></p>
+<details>
+<summary>
+Additional Links
+</summary>
+<p>
+<h4
+id="blockstreamminiscript-templates">Blockstream/miniscript-templates:</h4>
+<p><a href="https://github.com/Blockstream/miniscript-templates"><img
+src="https://avatars.githubusercontent.com/u/7424983?s=100"
+alt="Additional Link" /></a></p>
+</p>
+</details>

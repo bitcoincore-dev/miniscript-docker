@@ -9,7 +9,7 @@
 !Version
 !Status
 |- style="background-color: #ffcfcf"
-| [[Miniscript-Template-000-Timelocks-in-Templates.mediawiki|000]]
+| [[MinT-000.mediawiki|000]]
 | Timelocks-in-Templates
 | Rob Hamilton rob@anchorwatch.com
 | Rob Hamilton rob@anchorwatch.com

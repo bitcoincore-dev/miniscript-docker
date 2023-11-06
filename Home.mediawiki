@@ -1,0 +1,89 @@
+==Miniscript Templates==
+
+{| class="wikitable sortable" style="width: auto; text-align: center; font-size: smaller; table-layout: fixed;"
+|- style="background-color: #ffcfcf"
+| [[MinT-000]]
+| [[MinT-001]]
+| [[MinT-002]]
+| [[MinT-003]]
+| [[MinT-004]]
+|}
+
+==About==
+
+[https://bitcoin.sipa.be/miniscript/ Miniscript] is a language for composing Bitcoin [https://en.bitcoin.it/wiki/Script Script] in a structured way, facilitating analysis, composition, and generic signing. It's a simplified, composable subset of the Bitcoin [https://en.bitcoin.it/wiki/Script Script] language. Developed to overcome limitations in writing complex spending conditions directly in Bitcoin [https://en.bitcoin.it/wiki/Script Script], it enables formal verification and offers a more human-friendly interface.
+
+==Goals==
+
+# Have reviewed templates that leverage Miniscript to assure there are not unintended ways of executing a valid spend beyond the intended [https://raw.githubusercontent.com/bitcoin/bitcoin/master/src/script/miniscript.h Miniscript] policy.
+
+# Have standardized usages of Miniscript to streamline software and hardware wallet integrations.
+
+# Have uniform on-chain usage of Miniscript templates for better privacy.
+
+<H2>Submission Format</H2>
+
+===Name of Template===
+	Proposed Timelock Usage
+
+===Goal to be achieved by template===
+	A 3-of-3 that turns into a 2-of-3 after 90 days
+    NOTE: 144 blocks per day x 90 days = 12960 blocks
+
+===Miniscript Policy===
+	Input:
+	<pre>thresh(3, pk(key_1), pk(key_2), pk(key_3), older(12960))</pre>
+	Output:
+	<pre>thresh(3, pk(key_1), s:pk(key_2), s:pk(key_3), sln:older(12960))</pre>
+
+<pre>
+Spending cost analysis
+
+Script: 122 WU
+Input: 166.250000 WU
+Total: 288.250000 WU
+
+</pre>
+
+<h4>Resulting Bitcoin Script structure</h4>
+
+<pre>
+
+<key_1> OP_CHECKSIG OP_SWAP <key_2> OP_CHECKSIG OP_ADD OP_SWAP <key_3>
+OP_CHECKSIG OP_ADD OP_SWAP OP_IF
+  0
+OP_ELSE
+  <a032> OP_CHECKSEQUENCEVERIFY OP_0NOTEQUAL
+OP_ENDIF
+OP_ADD 3 OP_EQUAL
+
+</pre>
+
+{{Codesample |name=ingress.yaml |lang=yaml |scheme=dark |line=1 |highlight=5,8 |code=
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: foo-redirect
+  namespace: tool-foo
+  labels:
+    name: foo-redirect
+  annotations:
+    kubernetes.io/ingress.class: nginx
+}}
+
+
+[https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769 testnet tx]
+    https://mempool.space/testnet/tx/13a204ec065f76878ee1f59f79b3eb2cea2b3fda4d8938e6cfa6a8394d090769
+
+===Additional Links===
+
+[https://github.com/sipa/miniscript/blob/master/bitcoin/script/miniscript.h usage example]
+
+===Additional Resources===
+
+[[https://github.com/sipa/miniscript/tree/master | github.com/sipa/miniscript/tree/master]]
+
+[[https://bitcoin.sipa.be/miniscript | bitcoin.sipa.be/miniscript]]
+
+__NOTOC__
