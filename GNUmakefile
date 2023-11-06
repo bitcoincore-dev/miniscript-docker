@@ -78,7 +78,7 @@ MinT-004.md \
 	@echo
 more:## 	more help
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/	/'
-all:README $(TEMPLATES) $(TEMPLATES_MD)## 	make README $(TEMPLATES) Mint-**
+all:README $(TEMPLATES_MD)## 	make README $(TEMPLATES_MD) Mint-**
 #$(MAKE) -f Makefile help
 serve:## 	serve
 	@. serve 2>/tmp/serve.log
@@ -119,11 +119,11 @@ TOC:## 	TOC
 # 	sed 's/__NOTOC__//' > README.md || type -P docker && docker pull pandoc/latex:2.6 && \
 # 	docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 --preserve-tabs --ascii --from=mediawiki --to=markdown $@.mediawiki
 
-$(TEMPLATES).%:## 	$(TEMPLATES)
-	@command -v pandoc >/dev/null 2>&1 && \
-		pandoc --preserve-tabs --ascii --from=mediawiki --to=html $@.mediawiki | \
-		sed 's/__NOTOC__//' > $@.html || command -v docker 2>/dev/null && docker pull pandoc/latex:2.6 && \
-		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.mediawiki
+## $(TEMPLATES).%:## 	$(TEMPLATES)
+## 	@command -v pandoc >/dev/null 2>&1 && \
+## 		pandoc --preserve-tabs --ascii --from=mediawiki --to=html $@.mediawiki | \
+## 		sed 's/__NOTOC__//' > $@.html || command -v docker 2>/dev/null && docker pull pandoc/latex:2.6 && \
+## 		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.mediawiki
 
 $(TEMPLATES_MD).%:## 	$(TEMPLATES_MD)
 	@command -v pandoc >/dev/null 2>&1 && \
