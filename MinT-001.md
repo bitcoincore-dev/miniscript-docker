@@ -88,5 +88,3 @@ Transaction](https://mempool.space/testnet/tx/1a9ba5a5a37a0df72dfbc28f57de89ce35
 
 (Future Addition: Taproot-based keyset for Minitapscript once integrated
 into Core)
-
-\_\_NOTOC\_\_

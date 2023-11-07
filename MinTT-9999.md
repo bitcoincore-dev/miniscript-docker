@@ -1,10 +1,55 @@
-      MinT: 000
-      Title: Proposed Timelock Usage
-      Created: 2023-09-11
+      MinTT: 9999
+      Title: MinTT-9999-mini-taproot-script
+      Created: YYYY-MM-DD
 
-1\. Name of Template
+### MinTT-9999-mini-taproot-script {#mintt_9999_mini_taproot_script}
 
 Proposed Timelock Usage
+
+### Summary
+
+Miniscript is a language for writing (a subset of) Bitcoin Scripts in a
+structured way, enabling analysis, composition, generic signing and
+more.
+
+Bitcoin Script is an unusual stack-based language with many edge cases,
+designed for implementing spending conditions consisting of various
+combinations of signatures, hash locks, and time locks. Yet despite
+being limited in functionality it is still highly nontrivial to:
+
+Given a combination of spending conditions, finding the most economical
+script to implement it. Given two scripts, construct a script that
+implements a composition of their spending conditions (e.g. a multisig
+where one of the \"keys\" is another multisig). Given a script, find out
+what spending conditions it permits. Given a script and access to a
+sufficient set of private keys, construct a general satisfying witness
+for it. Given a script, be able to predict the cost of spending an
+output. Given a script, know whether particular resource limitations
+like the ops limit might be hit when spending. Miniscript functions as a
+representation for scripts that makes these sort of operations possible.
+It has a structure that allows composition. It is very easy to
+statically analyze for various properties (spending conditions,
+correctness, security properties, malleability, \...). It can be
+targeted by spending policy compilers (see below). Finally, compatible
+scripts can easily be converted to Miniscript form - avoiding the need
+for additional metadata for e.g. signing devices that support it.
+
+Miniscript is designed for (P2SH-)P2WSH and Tapscript (as defined in
+BIP342) embedded scripts. Most of its constructions work fine in P2SH as
+well, but some of the (optional) security properties rely on
+Segwit-specific rules. Furthermore, the implemented policy compilers
+assume a Segwit-specific cost model.
+
+Miniscript was designed and implemented by Pieter Wuille, Andrew
+Poelstra, and Sanket Kanjalkar at Blockstream Research, but is the
+result of discussions with several other people.
+
+Links:
+
+This website and C++ compiler: \[code\] Bitcoin Core compatible C++
+implementation: \[code\] Rust-miniscript implementation: \[code\] Talk
+about (an early version of) Miniscript at SBC\'19: \[video\]
+\[transcript\] \[slides\]
 
 2\. Goal to be achieved by template
 

@@ -100,5 +100,3 @@ Transaction](https://mempool.space/testnet/tx/caba0f5b81beac934aeed0b93a1a683bc8
 Transaction](https://mempool.space/testnet/tx/747087e37aadf7965568d5efa0a02ccc328908539c99e30fcb1bb9631554e317)
 
 (To Add Taproot descriptors once Minitapscript is merged into Core)
-
-\_\_NOTOC\_\_

@@ -1,8 +1,9 @@
-      MinT: 000
-      Title: Proposed Timelock Usage
+      MinTT: 999
+      Title: MinTT-999-mini-taproot-script
       Created: 2023-09-11
 
-1\. Name of Template
+MinTT-999-mini-taproot-script {#mintt_999_mini_taproot_script}
+-----------------------------
 
 Proposed Timelock Usage
 

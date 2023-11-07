@@ -233,5 +233,3 @@ TX](https://mempool.space/testnet/tx/857f4fed4c98169daaae18198e6c0bba692df9d7f50
 
 (To be updated with a taproot descriptor format once minitapscript is
 merged into core)
-
-\_\_NOTOC\_\_
