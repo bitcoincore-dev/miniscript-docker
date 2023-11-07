@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# avoid some errors
+touch favicon.ico
+touch apple-touch-icon.png
+touch apple-touch-icon-precomposed.png
+
 # Start an HTTP server from a directory, optionally specifying the port
 
 # Usage:
