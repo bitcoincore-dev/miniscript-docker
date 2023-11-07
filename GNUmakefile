@@ -49,40 +49,80 @@ endif
 
 endif
 
-## Submission workflow:
+##	: 
+##About
+##	: 
+##	Miniscript is a language for
+##	writing (a subset of) Bitcoin Scripts
+##	in a structured way, enabling analysis,
+##	composition, generic signing and more.
+##	: 
+##	: 
+##Submit:
 ##	
-## 1. Add your template to the TEMPLATES list
-## 2. Add your template to the TOC.mediawiki
-## 3. make && make serve
-## 4. Check html is rendered correctly
-## 5. Submit pull request
+##	1. Add your template to the TEMPLATES list
+##	2. Add your template to the TOC.mediawiki
+##	3. make && make serve
+##	4. Check html is rendered correctly
+##	5. Submit pull request
 
 TEMPLATES:=\
+MinTT-999 \
+MinT-999 \
 MinT-000 \
 MinT-001 \
 MinT-002 \
 MinT-003 \
 MinT-004 \
+MinT-9999 \
+MinTT-9999 \
 
 TEMPLATES_MD:=\
-README.md \
-MinT-000.md \
-MinT-001.md \
-MinT-002.md \
-MinT-003.md \
-MinT-004.md \
+MinTT-999 \
+MinT-999 \
+MinT-000 \
+MinT-001 \
+MinT-002 \
+MinT-003 \
+MinT-004 \
+MinT-9999 \
+MinTT-9999 \
 
 .PHONY:-
 -:
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?##/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 	@echo
-more:## 	more help
+help:## 	help
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/	/'
-all:README $(TEMPLATES_MD)## 	make README $(TEMPLATES_MD) Mint-**
-#$(MAKE) -f Makefile help
-serve:## 	serve
-	@. serve 2>/tmp/serve.log
 
+.PHONY: report
+report:## 	make variables
+	@echo ''
+	@echo 'TIME=${TIME}'
+	@echo 'PROJECT_NAME=${PROJECT_NAME}'
+	@echo 'VERSION=${VERSION}'
+	@echo ''
+	@echo 'OS=${OS}'
+	@echo 'OS_VERSION=${OS_VERSION}'
+	@echo 'ARCH=${ARCH}'
+	@echo ''
+	@echo 'HOMEBREW=${HOMEBREW}'
+	@echo 'PANDOC=${PANDOC}'
+	@echo ''
+	@echo 'TEMPLATES=${TEMPLATES}'
+	@echo 'TEMPLATES_MD=${TEMPLATES_MD}'
+
+all:README $(TEMPLATES) $(TEMPLATES_MD)## 	make README Mint-**
+#$(MAKE) -f Makefile help
+
+strip:## 	strip strings from files
+	sed -i '' 's/__NOTOC__//' *.mediawiki
+	sed -i '' 's/\\_\\_NOTOC\\_\\_//' *.md
+	sed -i '' 's/\\_\\_NOTOC\\_\\_//' *.html
+	sed -i '' 's/.md/.html/' index.html
+
+serve:strip## 	serve
+	@. serve 2>/tmp/serve.log
 
 # Example command:
 # docker \
@@ -101,52 +141,36 @@ README:## 	README
 	@command -v pandoc >/dev/null 2>&1 && \
 		pandoc --preserve-tabs --ascii --from=markdown --to=html $@.md | \
 		sed 's/__NOTOC__//' > index.html || command -v docker && docker pull pandoc/latex:2.6 && \
-		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md
+		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md > index.html || $(MAKE) docker-start
 	
 TOC:## 	TOC
 	@command -v pandoc >/dev/null 2>&1 && \
 		pandoc --preserve-tabs --ascii --from=markdown --to=html $@.md | \
 		sed 's/__NOTOC__//' > TOC.html || command -v docker && docker pull pandoc/latex:2.6 && \
-		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md
+		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md || $(MAKE) docker-start
 
 # @type -P pandoc >/tmp/miniscript-template.log && \
 # 	pandoc --preserve-tabs --from=mediawiki --to=markdown $@.mediawiki | \
 # 	sed 's/__NOTOC__//' > readme.html || type -P docker && docker pull pandoc/latex:2.6 && \
-# 	docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 --preserve-tabs --ascii --from=mediawiki --to=html $@.mediawiki | sed 's/__NOTOC__//' > $@.html
+# 	docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 --preserve-tabs --ascii --from=mediawiki --to=html $@.mediawiki | sed 's/__NOTOC__//' > $@.html || $(MAKE) docker-start
 #
 # @type -P pandoc >/tmp/miniscript-template.log && \
 # 	pandoc --preserve-tabs --from=mediawiki --to=markdown $@.mediawiki | \
 # 	sed 's/__NOTOC__//' > README.md || type -P docker && docker pull pandoc/latex:2.6 && \
-# 	docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 --preserve-tabs --ascii --from=mediawiki --to=markdown $@.mediawiki
+# 	docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 --preserve-tabs --ascii --from=mediawiki --to=markdown $@.mediawiki || $(MAKE) docker-start
 
-## $(TEMPLATES).%:## 	$(TEMPLATES)
-## 	@command -v pandoc >/dev/null 2>&1 && \
-## 		pandoc --preserve-tabs --ascii --from=mediawiki --to=html $@.mediawiki | \
-## 		sed 's/__NOTOC__//' > $@.html || command -v docker 2>/dev/null && docker pull pandoc/latex:2.6 && \
-## 		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.mediawiki
+ $(TEMPLATES).%:## 	$(TEMPLATES)
+ 	@command -v pandoc >/dev/null 2>&1 && \
+ 		pandoc --preserve-tabs --ascii --from=mediawiki --to=html $@.mediawiki | \
+ 		sed 's/__NOTOC__//' > $@.html || command -v docker 2>/dev/null && docker pull pandoc/latex:2.6 && \
+		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md && sed -i '' 's/\\_\\_NOTOC\\_\\_//' $@.html || $(MAKE) docker-start
 
 $(TEMPLATES_MD).%:## 	$(TEMPLATES_MD)
 	@command -v pandoc >/dev/null 2>&1 && \
 		pandoc --preserve-tabs --ascii --from=markdown --to=html $@.md | \
 		sed 's/__NOTOC__//' > $@.html || command -v docker 2>/dev/null && docker pull pandoc/latex:2.6 && \
-		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md
+		docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 $@.md && sed -i '' 's/\\_\\_NOTOC\\_\\_//' $@.html || $(MAKE) docker-start
 
-
-.PHONY: report
-report:## 	make variables
-	@echo ''
-	@echo 'TIME=${TIME}'
-	@echo 'PROJECT_NAME=${PROJECT_NAME}'
-	@echo 'VERSION=${VERSION}'
-	@echo ''
-	@echo 'OS=${OS}'
-	@echo 'OS_VERSION=${OS_VERSION}'
-	@echo 'ARCH=${ARCH}'
-	@echo ''
-	@echo 'HOMEBREW=${HOMEBREW}'
-	@echo 'PANDOC=${PANDOC}'
-	@echo ''
-	@echo 'TEMPLATES=${TEMPLATES}'
 
 checkbrew:## 	install brew command
 ifeq ($(HOMEBREW),)
@@ -160,6 +184,6 @@ endif
 submodules:## 	submodules
 	@git submodule update --init --recursive
 
-.PHONY:$(TEMPLATES) serve
+.PHONY:$(TEMPLATES) $(TEMPLATES_MD) serve
 
 -include docker.mk
