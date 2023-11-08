@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+PORT=${PORT:80}
 VERBOSE=${VERBOSE:-	}
 
 FORCE=${FORCE:-	}
@@ -22,37 +23,39 @@ MINT_003="or(99@thresh(2,thresh(2,pk(A1),pk(A2),pk(A3),after(1004)),or(10@thresh
 ## MINT_004
 MINT_004="or(99@thresh(3,thresh(2,pk(P1),pk(P2),pk(P3),after(1002),after(1003)),thresh(2,pk(A1),pk(A2),pk(A3),after(1004)),thresh(1,pk(SA1),pk(SA2),pk(SA3))),1@and(thresh(2,pk(M1),pk(M2),pk(M3)),after(1005)))"
 
+function examples(){
 
-function help {
-
-    printf "Usage:\n"
+printf "Examples:\n"
+printf "\n"
+printf "miniscript-docker run \n
+\'thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:older(100))\'
+"
+printf "
+\'and_v(or_c(pk(B),or_c(pk(C),v:older(1000))),pk(A))\'
+"
+printf "
+\'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))\'
+"
+printf "\n"
+    printf "MinT Examples:\n"
     printf "\n"
-    printf "  miniscript-docker\n"
-    printf "  miniscript-docker       [-v --verbose]\n"
+    printf "MinT-000"
     printf "\n"
-    printf "  miniscript-docker help  [-h --help]\n"
-    printf "  miniscript-docker make  [-m --make]\n"
-    printf "  miniscript-docker build [-b --build]\n"
+    printf "
+\'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))\'
+"
     printf "\n"
-    printf "  miniscript-docker run <miniscript>"
+    printf "MinT-001"
     printf "\n"
+    printf "
+\'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))\'
+"
     printf "\n"
-    printf "Examples:\n"
+    printf "MinT-002.1"
     printf "\n"
-    printf "  miniscript-docker run \'thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:older(100))\'\n"
-    printf "  miniscript-docker run \'and_v(or_c(pk(B),or_c(pk(C),v:older(1000))),pk(A))'\n"
-    printf "  miniscript-docker run \'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))'\n"
-    printf "\n"
-    printf "Miniscript Templates (MinT)\n"
-    printf "\n"
-    printf "MinT-000\n"
-    printf "  miniscript-docker run \'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))'\n"
-    printf "\n"
-    printf "MinT-001\n"
-    printf "  miniscript-docker run \'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))'\n"
-    printf "\n"
-    printf "MinT-002.1\n"
-    printf "  miniscript-docker run \'$MINT_002_1'\n"
+    printf "
+\'$MINT_002_1\'
+"
     ## 0
     ## scriptlen=206
     ## maxops=28
@@ -65,8 +68,12 @@ function help {
     ## timelock_mix=no
     ## miniscript=
     ## thresh(3,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),s:pk(XPUB4),s:pk(XPUB5),snu:older(100),snu:older(200))
-    printf "MinT-002.2\n"
-    printf "  miniscript-docker run \'$MINT_002_2'\n"
+    printf "\n"
+    printf "MinT-002.2"
+    printf "\n"
+    printf "
+\'$MINT_002_2\'
+"
     ## 0
     ## scriptlen=211
     ## maxops=28
@@ -80,8 +87,11 @@ function help {
     ## miniscript=
     ## thresh(3,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),s:pk(XPUB4),s:pk(XPUB5),snu:after(1694563200),snu:after(1694563200))
     printf "\n"
-    printf "MinT-002.3\n"
-    printf "  miniscript-docker run \'$MINT_002_3'\n"
+    printf "MinT-002.3"
+    printf "\n"
+    printf "
+\'$MINT_002_3\'
+"
     ## 0
     ## scriptlen=211
     ## maxops=28
@@ -96,7 +106,9 @@ function help {
     ## thresh(3,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),s:pk(XPUB4),s:pk(XPUB5),snu:after(1694563200),snu:after(1694476800))
     printf "\n"
     printf "MinT-002.4\n"
-    printf "  miniscript-docker run \'$MINT_002_4'\n"
+    printf "
+\'$MINT_002_4\'
+"
     printf "\n"
     ## 0
     ## scriptlen=209
@@ -111,18 +123,22 @@ function help {
     ## miniscript=
     ## thresh(3,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),s:pk(XPUB4),s:pk(XPUB5),snu:older(4194400),snu:older(4194500))
     printf "\n"
-
     printf "MinT-003\n"
-    printf "  miniscript-docker run \'$MINT_003'\n"
+    printf "\n"
+    printf "
+\'$MINT_003\'
+"
     ## X
     ## 647.0300000000
     ## 420
     ## or_i(and_v(v:thresh(2,pkh(M1),a:pkh(M2),a:pkh(M3)),after(1005)),and_v(v:thresh(2,pk(A1),s:pk(A2),s:pk(A3),sln:after(1004)),or_i(and_v(vc:or_i(pk_h(SA1),or_i(pk_h(SA2),pk_h(SA3))),after(1003)),thresh(2,pk(P1),s:pk(P2),s:pk(P3),sln:after(1002)))))
     ## or(99@thresh(2,thresh(2,pk(A1),pk(A2),pk(A3),after(1004)),or(10@thresh(2,pk(P1),pk(P2),pk(P3),after(1002)),and(thresh(1,pk(SA1),pk(SA2),pk(SA3)),after(1003)))),and(thresh(2,pk(M1),pk(M2),pk(M3)),after(1005)))\n"
     printf "\n"
-
     printf "MinT-004\n"
-    printf "  miniscript-docker run \'$MINT_004'\n"
+    printf "\n"
+    printf "
+\'$MINT_004\'
+"
     printf "\n"
 
     ## X
@@ -130,50 +146,47 @@ function help {
     ## 444
     ## or_i(and_v(v:thresh(2,pkh(M1),a:pkh(M2),a:pkh(M3)),after(1005)),and_v(v:thresh(2,pk(P1),s:pk(P2),s:pk(P3),sun:after(1002),sun:after(1003)),and_v(or_c(pk(SA1),or_c(pk(SA3),v:pkh(SA2))),thresh(2,pk(A1),s:pk(A2),s:pk(A3),sln:after(1004)))))
     ## or(99@thresh(3,thresh(2,pk(P1),pk(P2),pk(P3),after(1002),after(1003)),thresh(2,pk(A1),pk(A2),pk(A3),after(1004)),thresh(1,pk(SA1),pk(SA2),pk(SA3))),1@and(thresh(2,pk(M1),pk(M2),pk(M3)),after(1005)))
+exit
+}
+
+function help {
+
+    printf "Usage:\n"
+    printf "\n"
+    printf "  miniscript-docker\n"
+    printf "\n"
+    printf "  miniscript-docker examples\n"
+    printf "\n"
+    printf "  miniscript-docker help  [-h --help]\n"
+    printf "  miniscript-docker build [-b --build]\n"
+    printf "\n"
+    printf "  miniscript-docker run <miniscript>"
+    printf "\n"
     exit;
 }
 
 function build {
 
-    echo TAG=$TAG
-    echo FORCE=$FORCE
-    echo NOCACHE=$NOCACHE
-    echo VERBOSE=$VERBOSE
     [ "$NOCACHE" ]      && docker build --no-cache -t $TAG . && exit;
     [ ! -z "$NOCACHE" ] && docker build $NOCACHE   -t $TAG . && exit;
 
 }
 
-function make {
-
-    echo TAG=$TAG
-    echo FORCE=$FORCE
-    echo NOCACHE=$NOCACHE
-    echo VERBOSE=$VERBOSE
-	## remove on host - it may be a different OS
-    rm ./miniscript || echo && \
-    docker run --rm -v $PWD:/src $TAG sh -c "make miniscript" && \
-    exit;
-
-}
 function run () {
 
-    ## echo "\$1"=$1
-    ## echo "\$2"=$2
-    ## echo "\$3"=$3
-
-    ## echo TAG=$TAG
-    ## echo FORCE=$FORCE
-    ## echo NOCACHE=$NOCACHE
-    ## echo VERBOSE=$VERBOSE
-	## remove on host - it may be a different OS
-    ## Usage:
-    ## miniscript-docker run "thresh(2,pk(XPUB1),s:pk(XPUB2),s:pk(XPUB3),snl:older(100))"
-    docker run --rm -v $PWD:/src $TAG sh -c "echo '$1' | ./miniscript" && \
+    docker run --rm -v $PWD:/src $TAG sh -c "echo '$1' | miniscript" && \
     exit;
 
 }
-
+function shell (){
+    docker \
+        run \
+        -t \
+        -i \
+        --rm \
+        -p 127.0.0.1:$PORT:8080/tcp \
+        -v `pwd`:/src miniscript bash
+}
 ## argparse
 ## position $1
 ## echo "\${!#}=${!#}"
@@ -210,6 +223,14 @@ do
             ;;
         run) run $2 $3 $4
             ;;
+        shell) shell
+            ;;
+        examples) examples
+            ;;
+        --examples) examples
+            ;;
+        -e) examples
+            ;;
         --*) echo "bad option $1"
             ;;
         *) echo "argument $1"
@@ -223,6 +244,12 @@ do
     case "$2" in
         ## support docker-miniscript build -f
         ##         docker-miniscript -f build
+        verbose) VERBOSE=1; echo $VERBOSE
+            ;;
+        --verbose) VERBOSE=1; echo $VERBOSE
+            ;;
+        -v) VERBOSE=1; echo $VERBOSE
+            ;;
         --force) FORCE=--force; ## echo FORCE=$FORCE
             ;;
         -f) FORCE=--force;      ## echo FORCE=$FORCE
@@ -239,6 +266,12 @@ do
             ;;
         -m) make
             ;;
+        examples) examples
+            ;;
+        --examples) examples
+            ;;
+        -e) examaples
+            ;;
         --*) echo "bad option $1"
             ;;
         *) echo "argument $1"
@@ -246,23 +279,4 @@ do
     esac
     shift
 done
-
-
-
-# detect docker after argparse
-DOCKER=${DOCKER:-$(which docker)}
-[ -z "$DOCKER" ] && printf "'docker' not in \$PATH"
-
-[ "$1" == "make" ] && \
-    rm ./miniscript || echo && \
-    $DOCKER run --rm -v $PWD:/src miniscript sh -c "make miniscript" && \
-    exit;
-
-[ ! -z "$DOCKER" ] && \
-$DOCKER \
-run \
---rm \
---volume "`pwd`:/src" \
-miniscript \
-sh -c "echo '$1 $2 $3 $4' | ./miniscript"
-#"echo ' and(pk(A),or(pk(B),or(9@pk(C),older(1000))))' | ./miniscript"
+help
