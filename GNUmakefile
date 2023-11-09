@@ -1,0 +1,3 @@
+-:
+	./miniscript-docker
+	./miniscript-run
