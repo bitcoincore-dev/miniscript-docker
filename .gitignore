@@ -2,3 +2,5 @@
 *.png
 *.ico
 *.patch
+.nvmrc
+.gnostr/proxy
