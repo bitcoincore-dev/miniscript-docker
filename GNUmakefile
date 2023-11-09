@@ -8,7 +8,7 @@ export PWD
 ## echo $(PWD)
 ## echo $(DOCKER)
 
-docker:docker-build docker-run## 	        docker-build docker-run
+docker:docker-build## 	        docker-build
 	install $(PWD)/miniscript-docker /usr/local/bin/
 docker-build:## 		docker build -f Dockerfile -t miniscript .
 	$(DOCKER) build -f Dockerfile -t miniscript .
