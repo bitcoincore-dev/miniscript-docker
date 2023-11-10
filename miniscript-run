@@ -50,7 +50,9 @@ fi
 #
 for var in "$@"
 do
-    echo "$var" | $(which miniscript) 2>/dev/null; exit || \
-    echo "$var" | ./miniscript/miniscript;exit || help
+    #echo "var=$var"
+    echo "$var" | $(which miniscript); exit || \
+    #echo "$var" |  sed "s/\'//g" 
+    echo "$var" |  sed "s/\'//g" | $(which miniscript) 2>/dev/null; exit
 done
 help
