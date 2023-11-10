@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-[[ -z "$(command -v miniscript-docker)" ]] && \
-        install $0 /usr/local/bin || true
-
 PORT=${PORT:80}
 VERBOSE=${VERBOSE:-	}
-
 FORCE=${FORCE:-	}
 NOCACHE=${NOCACHE:-	} ## default rebuild without --no-cache
 TAG=${TAG:-miniscript}
-
 PYTHON3=$(which python3)
+
+[[ -z "$(command -v miniscript-docker)" ]] && install $0 /usr/local/bin || true
 
 if [[ "$(uname -s)" == "Darwin"  ]];
 then
