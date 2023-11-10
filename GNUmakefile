@@ -5,27 +5,17 @@ export PWD
 
 -:
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?##/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
-## echo $(PWD)
-## echo $(DOCKER)
+-include Makefile
 
-docker:docker-build## 	        docker-build
+docker:docker-miniscript## 	        docker-build
+	install $(PWD)/miniscript-run    /usr/local/bin/
 	install $(PWD)/miniscript-docker /usr/local/bin/
 docker-build:## 		docker build -f Dockerfile -t miniscript .
 	$(DOCKER) build -f Dockerfile -t miniscript .
-docker-make-miniscript:## 		docker-make-miniscript
-##if the miniscript binary doesnt include linux we rm ./miniscript
+docker-miniscript:docker-build## 		docker-miniscript
 	@[[ -z "$(shell file ./miniscript | grep inux)" ]] && echo "not linux" && rm ./miniscript || echo "miniscript is built for linux"
-	@$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript"
-
-docker-install-miniscript:docker-make-miniscript## 	docker-install-miniscript
+	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript"
 	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "install miniscript /usr/local/bin/ && which miniscript"
-.PHONY:docker-miniscript
-docker-miniscript:## 		docker-miniscript
-	@[[ -z "$(shell file ./miniscript | grep inux)" ]] && echo "not linux" && rm ./miniscript || echo "miniscript is built for linux"
-	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript ##ls"
-
-## docker run --rm --volume /Users/Shared/bitcoincore-dev/miniscript-templates/docker:/src miniscript sh -c 'rm -f ./miniscript || echo && make miniscript && install ./miniscript /usr/local/bin/ && which miniscript'
-## g++ -O3 -g0 -Wall -std=c++17 -march=native -flto -Ibitcoin bitcoin/util/strencodings.cpp bitcoin/util/spanparsing.cpp bitcoin/script/script.cpp bitcoin/script/miniscript.cpp compiler.cpp main.cpp -o miniscript
 
 .PHONY:test-command
 test-command:
@@ -41,6 +31,3 @@ example-commands:
 	@printf "\n"
 	@printf "./docker-miniscript \"echo \'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))\' | ./miniscript\""
 	@printf "\n"
-
-
--include Makefile
