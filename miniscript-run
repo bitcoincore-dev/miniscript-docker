@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+[[ -z "$(command -v miniscript-run)" ]] && install $0 /usr/local/bin >/dev/null || true
+
+function help(){
+
+    echo "miniscript-run '<miniscript>'";
+    echo "miniscript-run 'pk_h(test)'";exit
+
+}
+if [[ "$1" == "help" ]] || [[ "$1" == "-h" ]]; then
+
+    help; exit
+
+fi
+
+function install-miniscript(){
+
+    if [ -d "miniscript" ] ; then
+
+        echo "miniscript is a directory";
+        rm -rf miniscript
+
+    else
+
+        if [ -f "miniscript" ] ; then
+
+            if [[ ! -z "$(file miniscript | grep linux)" ]]; then
+
+                true;
+
+            else
+
+                rm -f miniscript
+
+            fi
+
+        fi
+
+        make miniscript && install ./miniscript /usr/local/bin 2>/dev/null
+
+    fi
+
+}
+if [[ "$1" == "install" ]]; then
+
+    install-miniscript; exit
+
+fi
+#
+for var in "$@"
+do
+    echo "$var" | $(which miniscript) 2>/dev/null; exit || \
+    echo "$var" | ./miniscript/miniscript;exit || help
+done
+help
