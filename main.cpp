@@ -23,7 +23,7 @@ static bool run(std::string&& line, int64_t count) {
         assert(str);
 
         printf(
-				"\n{ \"X\":\"X\",\n\"2\":\"%17.10f\",\n\"3\":\"%5i\",\n\"4\":\"%s\"\n}\n",
+				"\n{ \"X\":\"X\",\n\"2\":\"%17.10f\",\n\"3\":\"%5i\",\n\"4\":\"%s\"\n }\n",
 				ret->ScriptSize() + avgcost, (int)ret->ScriptSize(),
 				Abbreviate(std::move(*str)).c_str()
 				);
@@ -32,7 +32,7 @@ static bool run(std::string&& line, int64_t count) {
 
         auto ms = ret->ToString(COMPILER_CTX);
 		assert(ms);
-		printf("\n{ \"count\": \"%7li\",\n",(long)count);
+		printf("{ \"count\": \"%7li\",\n",(long)count);
 		printf("\"scriptlen\" : \"%i\",\n",(int)ret->ScriptSize());
 		printf("\"maxops\" : \"%i\",\n",(int)ret->GetOps());
 		printf("\"type\" : \"%s\",\n",ret->GetType() << "B"_mst ? "B" : ret->GetType() << "V"_mst ? "V" : ret->GetType() << "W"_mst ? "W" : ret->GetType() << "K"_mst ? "K" : "(invalid)");
@@ -43,7 +43,7 @@ static bool run(std::string&& line, int64_t count) {
 		printf("\"input\" : \"%s\",\n",ret->GetType() << "z"_mst ? "0" : ret->GetType() << "o"_mst ? (ret->GetType() << "n"_mst ? "1n" : "1") : ret->GetType() << "n"_mst ? "n" : "-");
 		printf("\"output\" : \"%s\",\n",ret->GetType() << "u"_mst ? "1" : "nonzero");
 		printf("\"timelock_mix\" : \"%s\",\n",ret->GetType() << "k"_mst ? "no": "yes");
-		printf("\"miniscript\" : \"%s\"}\n",Abbreviate(*ms).c_str());
+		printf("\"miniscript\" : \"%s\" }\n",Abbreviate(*ms).c_str());
 
 
 
