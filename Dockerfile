@@ -8,8 +8,6 @@ RUN apt-get install pandoc -y
 FROM pandoc as docker
 RUN apt-get install docker.io -y
 FROM docker as clone
-EXPOSE 8080 8081
-VOLUME /src
 RUN git clone --depth 1 https://github.com/sipa/miniscript /src/miniscript
 FROM clone as make
 WORKDIR /src/miniscript
@@ -22,3 +20,4 @@ COPY --from=clone /src /src
 ENV PATH=$PATH:/usr/bin/systemctl
 RUN ps -p 1 -o comm=
 EXPOSE 8080 8081
+VOLUME /src
