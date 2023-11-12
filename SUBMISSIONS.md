@@ -2,12 +2,8 @@
 
 <!-- add the link to your template in navigation README.md -->
 
-<center>
-
 |[![miniscript templates (MinT)](https://avatars.githubusercontent.com/u/7424983?s=30)](.)|[000](mint-000.md)|[001](mint-001.md)|[002](mint-002.md)|
 |----------|----------|----------|----------|
-
-</center>
 
 <!-- additional navigation
 
@@ -152,19 +148,19 @@ Resulting Bitcoin Script:
  
 [logo-100]: https://avatars.githubusercontent.com/u/7424983?s=100 "logo-100"
 
-<!--uncomment  ![Alt Image Text][logo-50] -->
+<!--uncomment ![Alt Image Text][logo-50]  -->
  
 [logo-50]: https://avatars.githubusercontent.com/u/7424983?s=50 "logo-50"
 
-<!--uncomment ![Alt Image Text][logo-30] -->
+<!--uncomment ![Alt Image Text][logo-30]  -->
  
 [logo-30]: https://avatars.githubusercontent.com/u/7424983?s=30 "logo-30"
 
-<!--uncomment ![Alt Image Text][logo-20] -->
+<!--uncomment ![Alt Image Text][logo-20]  -->
 
 [logo-20]: https://avatars.githubusercontent.com/u/7424983?s=30 "logo-20"
 
-<!--uncomment ![Alt Image Text][logo-10] -->
+<!--uncomment ![Alt Image Text][logo-10]  -->
 
 [logo-10]: https://avatars.githubusercontent.com/u/7424983?s=30 "logo-10"
 
@@ -175,4 +171,3 @@ Resulting Bitcoin Script:
 
 [^mint]: Miniscript Template (MinT)
 [^mintt]: MiniTapscript Template (MinTT)
-[^use-at-your-own-risk]: Use at your own risk.

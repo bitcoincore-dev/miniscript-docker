@@ -44,7 +44,11 @@ export GIT_HASH
 ##	4. Submit pull request
 
 TEMPLATES:=\
-SUBMISSIONS
+SUBMISSIONS \
+DEVELOPERS \
+mint-000 \
+mint-001 \
+mint-002
 
 .PHONY:-
 -:
@@ -64,15 +68,19 @@ strip:
 	@(\
 	if [[ "$(shell uname -s)" == "Linux" ]]; \
 	then \
-		sed -i  's/\\_\\_NOTOC\\_\\_//' *.md   >/dev/null  && \
-		sed -i  's/\\_\\_NOTOC\\_\\_//' *.html >/dev/null  && \
-		sed -i  's/.md/.html/' index.html      >/dev/null; fi)
+		sed -i     's/\\_\\_NOTOC\\_\\_//' *.md    >/dev/null  && \
+		sed -i     's/\\_\\_NOTOC\\_\\_//' *.html  >/dev/null  && \
+		sed -i     's/.md/.html/' index.html       >/dev/null  && \
+		sed -i     's/.md/.html/' DEVELOPERS.html  >/dev/null  && \
+		sed -i     's/.md/.html/' SUBMISSIONS.html >/dev/null; fi)
 	@(\
 	if [[ "$(shell uname -s)" == "Darwin" ]]; \
 	then \
-		sed -i  '' 's/\\_\\_NOTOC\\_\\_//' *.md   >/dev/null  && \
-		sed -i  '' 's/\\_\\_NOTOC\\_\\_//' *.html >/dev/null  && \
-		sed -i  '' 's/.md/.html/' index.html      >/dev/null; fi)
+		sed -i  '' 's/\\_\\_NOTOC\\_\\_//' *.md    >/dev/null  && \
+		sed -i  '' 's/\\_\\_NOTOC\\_\\_//' *.html  >/dev/null  && \
+		sed -i  '' 's/.md/.html/' index.html       >/dev/null  && \
+		sed -i  '' 's/.md/.html/' DEVELOPERS.html  >/dev/null  && \
+		sed -i  '' 's/.md/.html/' SUBMISSIONS.html >/dev/null; fi)
 
 .PHONY: report
 report:## 	make variables
@@ -149,7 +157,7 @@ else
 	@type brew && brew install --cask docker
 endif
 
-.PHONY:$(TEMPLATES) $(TEMPLATES_MD) serve
+.PHONY:$(TEMPLATES) serve
 
 #add additional make commands
 -include Makefile

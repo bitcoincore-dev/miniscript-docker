@@ -85,19 +85,19 @@ bitcoin.sipa.be/miniscript](https://bitcoin.sipa.be/miniscript )
  
 [logo-100]: https://avatars.githubusercontent.com/u/7424983?s=100 "logo-100"
 
-<!--uncomment  ![Alt Image Text][logo-50] -->
+<!--uncomment ![Alt Image Text][logo-50]  -->
  
 [logo-50]: https://avatars.githubusercontent.com/u/7424983?s=50 "logo-50"
 
-<!--uncomment ![Alt Image Text][logo-30] -->
+<!--uncomment ![Alt Image Text][logo-30]  -->
  
 [logo-30]: https://avatars.githubusercontent.com/u/7424983?s=30 "logo-30"
 
-<!--uncomment ![Alt Image Text][logo-20] -->
+<!--uncomment ![Alt Image Text][logo-20]  -->
 
 [logo-20]: https://avatars.githubusercontent.com/u/7424983?s=30 "logo-20"
 
-<!--uncomment ![Alt Image Text][logo-10] -->
+<!--uncomment ![Alt Image Text][logo-10]  -->
 
 [logo-10]: https://avatars.githubusercontent.com/u/7424983?s=30 "logo-10"
 

@@ -1,6 +1,6 @@
 <!-- header -->
 
-|[![miniscript templates (MinT)](https://avatars.githubusercontent.com/u/7424983?s=30)]()|[000](mint-000.md)|[001](mint-001.md)|[002](mint-002.md)|
+|[![miniscript templates (MinT)](https://avatars.githubusercontent.com/u/7424983?s=30)](.)|[000](mint-000.md)|[001](mint-001.md)|[002](mint-002.md)|
 |----------|----------|----------|----------|
 
 <!-- additional navigation
