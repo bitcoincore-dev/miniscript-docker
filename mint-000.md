@@ -2,11 +2,11 @@
       Title: Proposed Timelock Usage
       Created: 2023-09-11
 
-1\. Name of Template
+1. Name of Template
 
 Proposed Timelock Usage
 
-2\. Goal to be achieved by template
+2. Goal to be achieved by template
 
 [Miniscript](https://bitcoin.sipa.be/miniscript/) facilitates easier
 access to utilizing timelocks in Bitcoin, it opens a new frontier in
@@ -21,9 +21,9 @@ expedite recovery. General Miniscript usage supports any valid timelock
 value, this proposal seeks to guide implementation to more user-friendly
 practices.
 
-# Block height based Timelocks: {#block_height_based_timelocks}
+# Block height based Timelocks:
 
-## Absolute block height based Timelocks {#absolute_block_height_based_timelocks}
+## Absolute block height based Timelocks
 
 **Proposal**: Set absolute block height-based timelocks as multiples of
 100, always ending in 00.
@@ -35,7 +35,7 @@ Examples of valid Block Height Absolute Timelocks
 -   after(82800)
 -   after(615000)
 
-## Relative block height based Timelocks {#relative_block_height_based_timelocks}
+## Relative block height based Timelocks
 
 **Proposal**: Make relative block height-based timelocks multiples of
 100, except for the maximum value, 65,536 (2\^16).
@@ -44,9 +44,9 @@ Examples of valid Block Height Absolute Timelocks
 -   older(1500)
 -   older(65535)
 
-# Epoch timestamp based Timelocks: {#epoch_timestamp_based_timelocks}
+# Epoch timestamp based Timelocks:
 
-## Absolute Epochtime based Timelocks {#absolute_epochtime_based_timelocks}
+## Absolute Epochtime based Timelocks
 
 **Proposal**: To synchronize with real-world time rather than block
 time, employ epoch timestamps that are divisible by 43200 (Noon GMT) or
@@ -64,7 +64,7 @@ Propsoed Examples of valid Epoch Timestamp Absolute Timelocks
 -   after(2160172800) June 15th, 2038 Midnight GMT
 -   after(2234779200) October 25th, 2040 Noon GMT
 
-## Relative Epochtime based Timelocks {#relative_epochtime_based_timelocks}
+## Relative Epochtime based Timelocks
 
 Proposed Examples of valid Block Height Relative Timelocks:
 
