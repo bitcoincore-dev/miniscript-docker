@@ -78,32 +78,20 @@ Background:
     unit represents 512 seconds (8 minutes and 32 seconds) of time
     (65,356 units \* 512 seconds = 33,554,432 seconds).
 
-```{=html}
-<!-- -->
-```
 -   An Epoch Timestamp is not valid until the network\'s MTP (Median
     Time Past) of the past 11 blocks is greater than the epoch
     timestamp, MTP is defined in:
     [BIP113](https://github.com/bitcoin/bips/blob/master/bip-0113.mediawiki).
 
-```{=html}
-<!-- -->
-```
 -   The smallest value that can be used to have the miniscript compiler
     interpret a relative timelock is older(4194305) (calculated by
     following the BIP68 spec of: 1 \|= (1 \<\< 22)). This is a 1 unit
     timelock of duration 512 seconds.
 
-```{=html}
-<!-- -->
-```
 -   The maximum value for a relative epoch timelock is older(4259839)
     which is 65,535 unit timelock, resulting in 33,554,431 seconds, or
     388 days.
 
-```{=html}
-<!-- -->
-```
 -   The 512 second incrementor is a common multiple for the amount of
     seconds in 4 days, which is 675 units. To encourage intuitive useage
     of relative timelocks, they should be multiples of 675.
