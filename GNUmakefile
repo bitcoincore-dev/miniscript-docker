@@ -7,15 +7,20 @@ export PWD
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?##/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 -include Makefile
 
+.PHONY:install
+install:
+	@rm ./miniscript
+	@rm /usr/local/bin/miniscript
+	@$(MAKE) miniscript
+	@install $(PWD)/miniscript        /usr/local/bin/
+	@install $(PWD)/miniscript-*      /usr/local/bin/
+
 docker:docker-miniscript## 	        docker-build
-	install $(PWD)/miniscript-run    /usr/local/bin/
-	install $(PWD)/miniscript-docker /usr/local/bin/
 docker-build:## 		docker build -f Dockerfile -t miniscript .
-	$(DOCKER) build -f Dockerfile -t miniscript .
+	@$(DOCKER) build -f Dockerfile -t miniscript .
 docker-miniscript:docker-build## 		docker-miniscript
 	@[[ -z "$(shell file ./miniscript | grep inux)" ]] && echo "not linux" && rm ./miniscript || echo "miniscript is built for linux"
-	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make miniscript"
-	$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "install miniscript /usr/local/bin/ && which miniscript"
+	@$(DOCKER) run --rm -v $(PWD):/src   miniscript sh -c "make install"
 
 .PHONY:test-command
 test-command:
