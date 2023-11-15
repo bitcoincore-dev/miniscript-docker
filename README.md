@@ -30,13 +30,13 @@ docker pull ghcr.io/bitcoincore-dev/miniscript-docker:latest
 miniscript-docker run 'and(pk(A),or(pk(B),or(9@pk(C),older(1000))))'
 ```
 
+![miniscript-docker-run 1](https://github.com/bitcoincore-dev/miniscript-docker/assets/152159/7f1b02db-7063-41c2-859c-33639eb82d5a)
 
 ```
 miniscript-docker run 'and_v(or_c(pk(B),or_c(pk(C),v:older(1000))),pk(A))'
 ```
 
-
-EXAMPLES
+![miniscript-docker-run 2 png](https://github.com/bitcoincore-dev/miniscript-docker/assets/152159/1da94b41-ad45-4bda-8113-fa7b4f1326d5)
 
 ##### miniscript-docker examples
 
