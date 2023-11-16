@@ -101,7 +101,7 @@ Transaction](https://mempool.space/testnet/tx/747087e37aadf7965568d5efa0a02ccc32
 [^388days]: **~388 days**
 
 <!--
-               fragment     fragment      -->    Bitcoin Script
+               fragment     fragment      ->     Bitcoin Script
 -->
 
 [^pk_key1]: **`pk(key1) = c:pk_k(key1)`** --> **`<key1> CHECKSIG`**
