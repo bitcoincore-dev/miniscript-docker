@@ -92,16 +92,16 @@ Transaction](https://mempool.space/testnet/tx/747087e37aadf7965568d5efa0a02ccc32
 
 (To Add Taproot descriptors once Minitapscript is merged into Core)
 
-[^278days]: ~**278 days** ***assuming constant hashrate***
+[^278days]: **~278 days** ***assuming constant hashrate***
 
-[^455days]: ~**455 days** ***assuming constant hashrate***
+[^455days]: **~455 days** ***assuming constant hashrate***
 
-[^180days]: ~**180 days** ***6 months***
+[^180days]: **~180 days** ***6 months***
 
-[^388days]: ~**388 days**
+[^388days]: **~388 days**
 
 <!--
-             fragment   fragment      -->  Bitcoin Script
+               fragment     fragment      -->    Bitcoin Script
 -->
 
 [^pk_key1]: **`pk(key1) = c:pk_k(key1)`** --> **`<key1> CHECKSIG`**
