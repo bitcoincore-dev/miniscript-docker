@@ -92,36 +92,37 @@ Transaction](https://mempool.space/testnet/tx/747087e37aadf7965568d5efa0a02ccc32
 
 (To Add Taproot descriptors once Minitapscript is merged into Core)
 
-[^278days]: ~278 days assuming constant hashrate
+[^278days]: ~**278 days** ***assuming constant hashrate***
 
-[^455days]: ~455 days assuming constant hashrate
+[^455days]: ~**455 days** ***assuming constant hashrate***
 
-[^180days]: ~180 days, 6 months
+[^180days]: ~**180 days** ***6 months***
 
-[^388days]: ~388 days
+[^388days]: ~**388 days**
 
 <!--
              fragment   fragment      -->  Bitcoin Script
 -->
 
-[^pk_key1]: `pk(key1) = c:pk_k(key1)` --> `<key1> CHECKSIG`
-[^pk_key2]: `pk(key2) = c:pk_k(key2)` --> `<key2> CHECKSIG`
-[^pk_key3]: `pk(key3) = c:pk_k(key3)` --> `<key3> CHECKSIG`
-[^pk_key4]: `pk(key4) = c:pk_k(key4)` --> `<key4> CHECKSIG`
-[^pk_key5]: `pk(key5) = c:pk_k(key5)` --> `<key5> CHECKSIG`
+[^pk_key1]: **`pk(key1) = c:pk_k(key1)`** --> **`<key1> CHECKSIG`**
+[^pk_key2]: **`pk(key2) = c:pk_k(key2)`** --> **`<key2> CHECKSIG`**
+[^pk_key3]: **`pk(key3) = c:pk_k(key3)`** --> **`<key3> CHECKSIG`**
+[^pk_key4]: **`pk(key4) = c:pk_k(key4)`** --> **`<key4> CHECKSIG`**
+[^pk_key5]: **`pk(key5) = c:pk_k(key5)`** --> **`<key5> CHECKSIG`**
 
-[^abs_timelock]: after(NUM), older(NUM): Require that the nLockTime/nSequence value is at least NUM.
-
-[^rel_timelock]: after(NUM), older(NUM): Require that the nLockTime/nSequence value is at least NUM.
+[^abs_timelock]: **after(**int**)**, **older(**int**)**: Require that the **nLockTime** or **nSequence** value is at least (**int**).
 
 
-[^timelock]: NUM cannot be 0.
-
-[^older]: older(n) = <n> CHECKSEQUENCEVERIFY
-
-[^after]: older(n) = <n> CHECKLOCKTIMEVERIFY
-
-[^either]: either relative[^rel_timelock] or absolute[^abs_timelock]
+[^rel_timelock]: **after(**int**)**, **older(**int**)**: Require that the **nLockTime** or **nSequence** value is at least (**int**).
 
 
-[^k_type]: Key expressions (K Type) take their inputs from the top of the stack, but instead of verifying a condition directly they always push a public key onto the stack, for which a signature is still required to satisfy the expression. A "K" can be converted into a "B" using the c: wrapper (CHECKSIG). <!-- P. Wuille -->
+[^timelock]: **NUM** cannot be **0**.
+
+[^older]: **older(**n**)** = **<n>** **CHECKSEQUENCEVERIFY**
+
+[^after]: **after(**n**)** = **<n>** **CHECKLOCKTIMEVERIFY**
+
+[^either]: either **relative**[^rel_timelock] or **absolute**[^abs_timelock]
+
+
+[^k_type]: **Key** expressions (**K Type**) take their inputs from the top of the stack, but instead of verifying a condition directly they always push a public key onto the stack, for which a signature is still required to satisfy the expression. **A "K" can be converted into a "B" using the c: wrapper (CHECKSIG)**. <!-- P. Wuille -->
