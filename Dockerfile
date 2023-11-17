@@ -26,8 +26,8 @@ RUN make miniscript
 RUN echo $(date +%s) > updated
 RUN install miniscript /usr/local/bin
 RUN echo $(date +%s) > updated
-RUN make miniscript.js
-RUN echo $(date +%s) > updated
+#RUN make miniscript.js ##TODO: better buildx multiplatform building
+#RUN echo $(date +%s) > updated
 FROM make as install
 RUN install ./miniscript /usr/local/bin
 RUN echo $(date +%s) > updated
