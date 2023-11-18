@@ -58,55 +58,189 @@ Below is a reference diagram on how the 3 Key Time Layered Multisig operates acr
 
 ---
 
-This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$
-
-This sentence uses $\` and \`$ delimiters to show math inline:  $`\sqrt{3x-1}+(1+x)^2`$
-
-
-**The Cauchy-Schwarz Inequality**
-$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
-
-
-**The Cauchy-Schwarz Inequality**
-
-```math
-\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
-```
-
-
-This expression uses `\$` to display a dollar sign: $\sqrt{\$4}$
-
-```math
-$\sqrt{\$4}$
-```
-
-To split <span>$</span>100 in half, we calculate $100/2$
-
-$100/2$
-
-
-```math
-$100/2$
-```
----
-
 #### Layer 1
 <center>
 
-```math
-1_n + 2_n
-```
+<!--
 
-$1_n + 2_n$
+$$\left[ \sum_{k=1}^n a_k b_k \right]_2$$
+
+$$\left( \sum_{k=1}^n a_k^2 \right)$$
+
+$$\left( \sum_{k=1}^n b_k^2 \right)$$
+
+$$\leq$$
 
 
+1. $$\left[ Key_n + Key_n  \right]$$
 
-|3 Key Layered Timelock|key1|key2|key3||timelock|
+1. $$\left[ Key_n + Key_n  \right]$$
+
+|$$\left[ Key_n + Key_n  \right]$$|$$\left[ Key_n + Key_n  \right]$$|$$\left[ Key_n + Key_n  \right]$$|
+|:-- |:--:| --:|
+|$$\left[ Key_n + Key_n  \right]$$|$$\left[ Key_n + Key_n  \right]$$|$$\left[ Key_n + Key_n  \right]$$|
+
+|1|2|
+|:-- | --:|
+|1|2|
+
+|1|2|
+|:-- | --:|
+
+|$$Key_1$$|&and;[^a_nd]|$$Key_2$$| 
+|:-- |:--:| --:|
+| ![assets/key.svg][key] |&and;| ![assets/key.svg][key] |
+
+-->
+
+<!-- leaving the plus operator in for now -->
+<!-- logical AND is better -->
+
+|3 Key Layered Timelock|$$Key_1$$|$$Key_2$$|$$Key_3$$|$$+$$ <!-- &and;-->|$$Timelock$$|
 |:--|:-------------:|:---------------:|:-------------:|:-:|:-:|
-|$Key\_n + Key\_n + Lock$|![assets/key.svg](assets/key.svg)| ![./assets/key.svg](./assets/key.svg) | ![./assets/key.svg](./assets/key.svg) | + | ![./assets/lock.svg](./assets/lock.svg) |
+|$$Key_n$$ + $$Key_n$$ + $$Lock$$| ![assets/key.svg][key] | ![assets/key.svg][key] | ![assets/key.svg][key] | $$+$$ | ![assets/lock.svg][lock] |
+
+![](mint-001/diagram.jpg)
+
 
 </center>
 
+##### Valid Spending Conditions variations
+
+---
+<center>
+</center>
+
+## variations
+
+**pk(**$$Key_1$$**)** &and; **pk(**$$Key_2$$**)**
+
+**(**$$Key_1$$**)** &and; **(**$$Key_2$$**)**
+
+**(**$$Key_1$$**)** `AND` **(**$$Key_2$$**)**
+
+
+|![assets/key.svg][key] $$Key_1$$|&and;|![assets/key.svg][key] $$Key_2$$| 
+|:-- |:--:| --:|
+
+|![assets/key.svg][key] $$Key_1$$|`AND`|![assets/key.svg][key] $$Key_2$$| 
+|:-- |:--:| --:|
+
+---
+
+##### Valid Spending Conditions
+
+###### variations
+
+**pk(**$$Key_1$$**)** &and; **pk(**$$Key_2$$**)**
+
+**(**$$Key_1$$**)** &and; **(**$$Key_2$$**)**
+
+**(**$$Key_1$$**)** `+` **(**$$Key_2$$**)**
+<center>
+
+<!-- leaving the plus operator in for now -->
+<!-- logical ANDs and ORs are better -->
+
+
+|![assets/key.svg][key] $$Key_1$$|$$+$$ <!-- &and;-->|![assets/key.svg][key] $$Key_2$$| 
+|:-- |:--:| --:|
+
+</center>
+**(**$$Key_1$$**)** `AND` **(**$$Key_3$$**)**
+<center>
+
+|![assets/key.svg][key] $$Key_1$$|`AND`|![assets/key.svg][key] $$Key_3$$| 
+|:-- |:--:| --:|
+
+</center>
+**(**$$Key_2$$**)**  &and; **(**$$Key_3$$**)**
+<center>
+
+|![assets/key.svg][key] $$Key_2$$|&and;|![assets/key.svg][key] $$Key_3$$| 
+|:-- |:--:| --:|
+
+</center>
+
+MORE DETAIL...
+
+
+---
+
+##### Valid Spending Conditions alternate diagram
+
+###### variations
+
+<center>
+
+<!-- PLUS means concatinate -->
+
+
+|![assets/key.svg][key] $$Key_1$$|$$+$$ <!-- &and;-->|![assets/key.svg][key] $$Key_2$$| OR |![assets/key.svg][key] $$Key_1$$|`AND` <!-- &and;-->|![assets/key.svg][key] $$Key_3$$|OR|![assets/key.svg][key] $$Key_2$$|&and;|![assets/key.svg][key] $$Key_3$$| 
+|:-- |:--:| --:|:--:|:-- |:--:| --:|:--:|:-- |:--:| --:|
+
+</center>
+
+
+$$\left[ Key_1 + Key_2  \right] OR \left [ Key_1 + Key_3  \right] OR \left[ Key_2 + Key_3  \right]$$
+
+##### alternate using \space AND \space \space OR \space
+
+###### variations
+
+$$\left[ Key_1 \space AND \space Key_2 \right] \space OR \space \left[ Key_1 \space AND \space Key_3 \right] \space OR \space \left[ Key_2 \space AND \space Key_3  \right]$$
+
+&#x2064; &#x2064; &#x2064;
+
+$$\left[ Key_1 \space AND \space Key_2  \right] \space OR \space \left[ Key_1 \space AND \space Key_3  \right] \space OR \space \left[ Key_2 \space AND \space Key_3  \right]$$
+
+&#x2064; &#x2064; &#x2064;
+
+MORE DETAIL...
+
+##### alternate OR ∨ with alternate AND
+
+|![assets/key.svg][key] $$Key_1$$|&and;|![assets/key.svg][key] $$Key_2$$|&or;|![assets/key.svg][key] $$Key_1$$|&and;|![assets/key.svg][key] $$Key_3$$|&or;|![assets/key.svg][key] $$Key_2$$|&and;|![assets/key.svg][key] $$Key_3$$| 
+|:-- |:--:| --:|:--:|:-- |:--:| --:|:--:|:-- |:--:| --:|
+
+
+<!-- AND OR -->
+$$\left[ Key_1 ∧ Key_2  \right] ∨ \left[ Key_1 ∧ Key_3  \right] ∨ \left[ Key_2 ∧ Key_3  \right]$$
+
+
+
+
+---
+
+<!--
+
+|$$\left[ Key_1 + Key_2  \right]$$|$$\left[ Key_1 + Key_3  \right]$$|$$\left[ Key_2 + Key_3  \right]$$|
+|:-- |:--:| --:|
+|$$\left[ Key_1 + Key_2  \right]$$|$$\left[ Key_1 + Key_3  \right]$$|$$\left[ Key_2 + Key_3  \right]$$|
+
+
+![assets/key.svg][key]
+
+|$$\left[ Key_1 + Key_2  \right]$$|$$\left[ Key_1 + Key_3  \right]$$|$$\left[ Key_2 + Key_3  \right]$$|
+|:-- |:--:| --:|
+
+
+|![assets/key.svg][key] $$Key_1$$|&and;[^a_nd]|![assets/key.svg][key] $$Key_2$$| 
+|:-- |:--:| --:|
+| ![assets/key.svg][key] |&and;| ![assets/key.svg][key] |
+
+
+|![assets/key.svg][key] $$Key_1$$|&and;[^and]|![assets/key.svg][key] $$Key_2$$| 
+|:-- |:--:| --:|
+
+-->
+
+<!--
+
+![assets/key.svg][key]
+![assets/lock.svg][lock]
+
+-->
 
 <!--
 
@@ -207,6 +341,9 @@ Transaction](https://mempool.space/testnet/tx/1a9ba5a5a37a0df72dfbc28f57de89ce35
 into Core)
 
 
+![]()
+
+
 [^278days]: **~278 days** ***assuming constant hashrate***
 
 [^455days]: **~455 days** ***assuming constant hashrate***
@@ -239,8 +376,15 @@ into Core)
 
 [^either]: either **relative**[^rel_timelock] or **absolute**[^abs_timelock]
 
+[^and]: **LOGICAL AND (&&)** [more](https://en.cppreference.com/w/cpp/language/operator_logical) 
+
+[^or]: **LOGICAL OR (||)** [more](https://en.cppreference.com/w/cpp/language/operator_logical) 
 
 [^k_type]: **Key** expressions (**K Type**) take their inputs from the top of the stack, but instead of verifying a condition directly they always push a public key onto the stack, for which a signature is still required to satisfy the expression. **A "K type" can be converted into a "B type" using the c: wrapper (CHECKSIG)**. <!-- P. Wuille -->
 
 
-[lock1]: assets/lock.svg "lock"
+[lock]: assets/lock.svg "lock"
+
+[key]: assets/key.svg "key"
+
+
