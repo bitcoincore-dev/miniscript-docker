@@ -60,26 +60,23 @@ Below is a reference diagram on how the 3 Key Time Layered Multisig operates acr
 #### Layer 1
 <center>
 
-|3 key layered timelock|key1|key2|key3||timelock|
+|3 Key Layered Timelock|key1|key2|key3||timelock|
 |:--|:-------------:|:---------------:|:-------------:|:-:|:-:|
 |\\[pk(Key_n) + pk(Key_n) \ + Lock\\]|![../assets/key.svg](assets/key.svg)| ![assets/key.svg](assets/key.svg) | ![assets/key.svg](assets/key.svg) |\\( + \\)| ![assets/lock.svg](assets/lock.svg) |
 
 </center>
 
-##### Spending Conditions
 <center>
 
-|**Satisfy**|\\[Key_1 + Key_2\\]|\\[Key_1 + Key_3\\]|\\[Key_2 + Key_3\\]
+|**Spending Conditions**|\\[Key_1 + Key_2\\]|\\[Key_1 + Key_3\\]|\\[Key_2 + Key_3\\]
 |:--|:-------------:|:---------------:|:-------------:|:-:|:-:|
-|\\[pk(Key_n) + pk(Key_n)\\]|![../assets/key.svg](assets/key.svg)| ![assets/key.svg](assets/key.svg) | ![assets/key.svg](assets/key.svg) |\\( + \\)| ![assets/lock.svg](assets/lock.svg) |
-
-|<!-- -->|<!-- -->|<!-- -->|<!-- -->|
-|:--|:-------------:|:---------------:|:-------------:|:-:|:-:|
-|**Satisfy**|key1 + key2|key1 + key3|key2 + key3|
 |\\[pk(Key_n) + pk(Key_n)\\]|![../assets/key.svg](assets/key.svg)| ![assets/key.svg](assets/key.svg) | ![assets/key.svg](assets/key.svg) |\\( + \\)| ![assets/lock.svg](assets/lock.svg) |
 
 ---
 
+</center>
+
+<!--
 
 
 |![Alt image text](https://avatars.githubusercontent.com/u/7424983?s=30 "alt title")|[000](mint-000.md) +|[001](mint-001.md) + |[002](mint-002.md)|
