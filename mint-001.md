@@ -56,25 +56,57 @@ Initially, the wallet requires 2-of-3 keys, functioning as a traditional 2-of-3 
 
 Below is a reference diagram on how the 3 Key Time Layered Multisig operates across time:
 
+---
+
+This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$
+
+This sentence uses $\` and \`$ delimiters to show math inline:  $`\sqrt{3x-1}+(1+x)^2`$
+
+
+**The Cauchy-Schwarz Inequality**
+$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+
+
+**The Cauchy-Schwarz Inequality**
+
+```math
+\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+```
+
+
+This expression uses `\$` to display a dollar sign: $\sqrt{\$4}$
+
+```math
+$\sqrt{\$4}$
+```
+
+To split <span>$</span>100 in half, we calculate $100/2$
+
+$100/2$
+
+
+```math
+$100/2$
+```
+---
 
 #### Layer 1
 <center>
 
+```math
+1_n + 2_n
+```
+
+$1_n + 2_n$
+
+
+
 |3 Key Layered Timelock|key1|key2|key3||timelock|
 |:--|:-------------:|:---------------:|:-------------:|:-:|:-:|
-|\\[pk(Key_n) + pk(Key_n) \ + Lock\\]|![../assets/key.svg](assets/key.svg)| ![assets/key.svg](assets/key.svg) | ![assets/key.svg](assets/key.svg) |\\( + \\)| ![assets/lock.svg](assets/lock.svg) |
+|$Key\_n + Key\_n + Lock$|![assets/key.svg](assets/key.svg)| ![./assets/key.svg](./assets/key.svg) | ![./assets/key.svg](./assets/key.svg) | + | ![./assets/lock.svg](./assets/lock.svg) |
 
 </center>
 
-<center>
-
-|**Spending Conditions**|\\[Key_1 + Key_2\\]|\\[Key_1 + Key_3\\]|\\[Key_2 + Key_3\\]
-|:--|:-------------:|:---------------:|:-------------:|:-:|:-:|
-|\\[pk(Key_n) + pk(Key_n)\\]|![../assets/key.svg](assets/key.svg)| ![assets/key.svg](assets/key.svg) | ![assets/key.svg](assets/key.svg) |\\( + \\)| ![assets/lock.svg](assets/lock.svg) |
-
----
-
-</center>
 
 <!--
 
