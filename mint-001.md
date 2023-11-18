@@ -181,10 +181,10 @@ MORE DETAIL...
 
 </center>
 
-
-$$\left[ Key_1 + Key_2  \right] OR \left [ Key_1 + Key_3  \right] OR \left[ Key_2 + Key_3  \right]$$
-
+###### variations
 ##### alternate using \space AND \space \space OR \space
+
+$$\left[ Key_1 + Key_2 \right] \space OR \space \left [ Key_1 \space AND \space Key_3 \right] \space OR \space \left[ Key_2 \space ∧ \space Key_3 \right]$$
 
 ###### variations
 
@@ -192,17 +192,15 @@ $$\left[ Key_1 \space AND \space Key_2 \right] \space OR \space \left[ Key_1 \sp
 
 &#x2064; &#x2064; &#x2064;
 
-$$\left[ Key_1 \space AND \space Key_2  \right] \space OR \space \left[ Key_1 \space AND \space Key_3  \right] \space OR \space \left[ Key_2 \space AND \space Key_3  \right]$$
-
-&#x2064; &#x2064; &#x2064;
-
-MORE DETAIL...
 
 ##### alternate OR ∨ with alternate AND
+
+<center>
 
 |![assets/key.svg][key] $$Key_1$$|&and;|![assets/key.svg][key] $$Key_2$$|&or;|![assets/key.svg][key] $$Key_1$$|&and;|![assets/key.svg][key] $$Key_3$$|&or;|![assets/key.svg][key] $$Key_2$$|&and;|![assets/key.svg][key] $$Key_3$$| 
 |:-- |:--:| --:|:--:|:-- |:--:| --:|:--:|:-- |:--:| --:|
 
+</center>
 
 <!-- AND OR -->
 $$\left[ Key_1 ∧ Key_2  \right] ∨ \left[ Key_1 ∧ Key_3  \right] ∨ \left[ Key_2 ∧ Key_3  \right]$$
@@ -340,10 +338,6 @@ Transaction](https://mempool.space/testnet/tx/1a9ba5a5a37a0df72dfbc28f57de89ce35
 (Future Addition: Taproot-based keyset for Minitapscript once integrated
 into Core)
 
-
-![]()
-
-
 [^278days]: **~278 days** ***assuming constant hashrate***
 
 [^455days]: **~455 days** ***assuming constant hashrate***
@@ -351,7 +345,6 @@ into Core)
 [^180days]: **~180 days** ***6 months***
 
 [^388days]: **~388 days**
-
 
 [^pk_key1]: **`pk(key1) = c:pk_k(key1)`** --> **`<key1> CHECKSIG`**
 
