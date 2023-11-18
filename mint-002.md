@@ -4,53 +4,54 @@
 
 ## Motivation
 
-Expanding upon the concept of a 3 key timed multisig, a 5 key timed multisig allows for multiple timelocks to be introduced for additional flexibility.
+Expanding upon the concept of a [2-of-3 key timed multisig](mint-001.md) [(mint-001)](mint-001.md), a 5 key timed multisig allows for multiple timelocks to be introduced for additional flexibility.
 
-A timelock can be employed to allow a native 3 of 5 multisig to become 2 of 5, and eventually 1 of 5 for disaster recovery. This can be employed by using a miniscript `tresh()` with seven conditions:
+A timelock can be employed to allow a native 3-of-5 multisig to become 2-of-5, and eventually 1-of-5 for disaster recovery. 
 
-### 3 Conditions to be satisfied by:
+This can be employed by using a miniscript `tresh()` with seven conditions:
+
+### 3 Layer Conditions to be satisfied using:
 
 #### Base expressions (type B). 
 
-**timelock**: **after(**int**)**[^after] or **older(**int**)** - either **relative** or **absolute** [^timelock].
+1. **timelock**: **after(**int**)**[^after] or **older(**int**)** - either **relative** or **absolute** [^timelock].
 
-**timelock**: **after(**int**)** or **older(**int**)**[^older]  - either **relative** or **absolute** [^either].
+2. **timelock**: **after(**int**)** or **older(**int**)**[^older]  - either **relative** or **absolute** [^either].
 
 #### Key expressions[^k_type] (type K).
 
-**pk(**key1**)**[^pk_key1]
+1. **pk(**key1**)** [^pk_key1]
 
-**pk(**key2**)**[^pk_key2]
+2. **pk(**key2**)** [^pk_key2]
 
-**pk(**key3**)**[^pk_key3]
+3. **pk(**key3**)** [^pk_key3]
 
-**pk(**key4**)**[^pk_key4]
+4. **pk(**key4**)** [^pk_key4]
 
-**pk(**key5**)**[^pk_key5]
+5. **pk(**key5**)** [^pk_key5]
 
 
 ### More on Timelock Values
 
--   The security of the descriptor template is not dependent on the value of a relative or absolute timelock, as it only impacts the duration of the timelock.
+- The security of the descriptor template is not dependent on the value of a relative or absolute timelock, as it only impacts the duration of the timelock.
     
--   For reference transactions on testnet, short duration timelocks have been used. In practice timelock values will differ.
+- For reference transactions on testnet, short duration timelocks have been used. In practice timelock values will differ.
     
--   Relative timelock descriptors offer a structure that can persist across time, requiring a self-send to extend the timelock security, and thus offering a better ability to have standard timelock durations within templates.
+- Relative timelock descriptors offer a structure that can persist across time, requiring a self-send to extend the timelock security, and thus offering a better ability to have standard timelock durations within templates.
     
--   It is harder to set established timelock values with absolute timelock descriptors as they need to be regularly updated.
+- It is harder to set established timelock values with absolute timelock descriptors as they need to be regularly updated.
 
 ##### Suggested Relative Block Height Timelocks:
 
-**<code>older(32800)</code>** ***Halfway point of block height relative timelock***[^278days]
+- **older(**32800**)** - Halfway point of block height relative timelock [^278days]
 
-**<code>older(65535)</code>** ***Maximum duration of a block height relative timelock***[^455days]
-
+- **older(**65535**)** - Maximum duration of a block height relative timelock [^455days]
 
 ##### Suggested Relative Epoch Timmelocks:
 
-**<code>older(4224680)</code>** **Approximate Halfway point of epoch time relative timelock**[^180days]
+- **older(**4224680**)** - Approximate Halfway point of epoch time relative timelock [^180days]
 
-**<code>older(4259839)</code>** **Maximum duration of an epoch time relative timelock**[^388days]
+- **older(**4259839**)** - Maximum duration of an epoch time relative timelock [^388days]
 
 
 Below is a reference diagram on how the 5 Key Time Layered Multisig
