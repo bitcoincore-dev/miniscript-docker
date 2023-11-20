@@ -183,11 +183,10 @@ function shell (){
     docker-start
     docker \
         run \
-        -d \
         -t \
         -i \
         --rm \
-        -p 127.0.0.1:$PORT:8080/tcp \
+        -p 127.0.0.1:0:8080/tcp \
         -v `pwd`:/src miniscript bash
 
 }

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+JQ=$(which jq)
+echo "or_i(and_v(v:thresh(2,pkh(M1),a:pkh(M2),a:pkh(M3)),after(1005)),and_v(v:thresh(2,pk(P1),s:pk(P2),s:pk(P3),sun:after(1002),sun:after(1003)),and_v(or_c(pk(SA1),or_c(pk(SA3),v:pkh(SA2))),thresh(2,pk(A1),s:pk(A2),s:pk(A3),sln:after(1004)))))" | ./miniscript | $JQ || true
