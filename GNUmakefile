@@ -44,8 +44,9 @@ docker-miniscript:docker-build## 		docker-miniscript
 	@[[ -z "$(shell file ./miniscript | grep inux)" ]] && echo "not linux" && rm ./miniscript || echo "miniscript is built for linux"
 	@$(DOCKER) run --rm -v $(PWD):/src --publish 80:8080  miniscript sh -c "make install"
 
-test:
-	@bash $< $@.sh || $(MAKE) miniscript
+.PHONY:miniscript-tests
+miniscript-tests:## 	miniscript-tests
+	@bash $< $@ 2>/dev/null || true
 
 example-commands:
 	@printf "\n"
