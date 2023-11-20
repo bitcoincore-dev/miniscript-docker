@@ -1,5 +1,8 @@
 ## miniscript-docker
 
+![miniscript-docker-web](https://github.com/bitcoincore-dev/miniscript-docker/assets/152159/287c6835-b14c-4ae5-a22b-6da9812a8f8d)
+
+
 #### Usage:
 
 ```
