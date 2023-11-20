@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+[[ -z "$(command -v miniscript-tests)" ]] && \
+        install $0 /usr/local/bin || true
+## add your won tests
+## miniscript-test-0
+## miniscript-test-1000
+## etc..
+
+TESTS=$(echo miniscript-test-{0..1000})
+for ms in $TESTS
+do
+    . $ms 2>/dev/null
+done

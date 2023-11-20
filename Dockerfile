@@ -10,15 +10,9 @@ RUN apt-get install systemd bash jq -y
 RUN echo $(date +%s) > updated
 RUN chmod +x /usr/bin/systemctl
 RUN echo $(date +%s) > updated
-FROM systemd as pandoc
-RUN apt-get install pandoc -y
-RUN echo $(date +%s) > updated
-FROM pandoc as docker
-RUN apt-get install docker.io -y
-RUN echo $(date +%s) > updated
-FROM docker as clone
+FROM systemd as clone
 RUN rm -rf /src
-RUN git clone --branch v0.0.7 --depth 1 https://github.com/bitcoincore-dev/miniscript-docker /src
+RUN git clone --branch v0.0.8 --depth 1 https://github.com/bitcoincore-dev/miniscript-docker /src
 RUN echo $(date +%s) > updated
 FROM clone as make
 WORKDIR /src
