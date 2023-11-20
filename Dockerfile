@@ -12,7 +12,7 @@ RUN chmod +x /usr/bin/systemctl
 RUN echo $(date +%s) > updated
 FROM systemd as clone
 RUN rm -rf /src
-RUN git clone --branch v0.0.8 --depth 1 https://github.com/bitcoincore-dev/miniscript-docker /src
+RUN git clone --branch v0.0.9 --depth 1 https://github.com/bitcoincore-dev/miniscript-docker /src
 RUN echo $(date +%s) > updated
 FROM clone as make
 WORKDIR /src
@@ -25,7 +25,7 @@ RUN echo $(date +%s) > updated
 FROM make as install
 RUN install ./miniscript /usr/local/bin
 RUN echo $(date +%s) > updated
-RUN install ./miniscript-* /usr/local/bin
+RUN install ./miniscript-** /usr/local/bin
 RUN install ./serve /usr/local/bin
 RUN echo $(date +%s) > updated
 WORKDIR /src
