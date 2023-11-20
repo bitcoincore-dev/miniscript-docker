@@ -25,7 +25,7 @@ RUN echo $(date +%s) > updated
 FROM make as install
 RUN install ./miniscript /usr/local/bin
 RUN echo $(date +%s) > updated
-RUN install ./miniscript-* /usr/local/bin
+RUN install ./miniscript-** /usr/local/bin
 RUN install ./serve /usr/local/bin
 RUN echo $(date +%s) > updated
 WORKDIR /src
