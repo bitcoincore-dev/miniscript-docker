@@ -56,7 +56,7 @@ docker pull ghcr.io/bitcoincore-dev/miniscript-docker:latest
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/bitcoincore-dev/miniscript-docker/master/miniscript-docker)" - serve
 ```
 
-![miniscript-docker-serve](https://github.com/bitcoincore-dev/miniscript-docker/assets/152159/75a556b2-a526-4fb0-abf7-2ffb8fb0e47a)
+![miniscript-docker-web](https://github.com/bitcoincore-dev/miniscript-docker/assets/152159/287c6835-b14c-4ae5-a22b-6da9812a8f8d)
 
 
 <hr>
