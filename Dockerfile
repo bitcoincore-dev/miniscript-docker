@@ -18,7 +18,7 @@ RUN apt-get install docker.io -y
 RUN echo $(date +%s) > updated
 FROM docker as clone
 RUN rm -rf /src
-RUN git clone --branch v0.0.6 --depth 1 https://github.com/bitcoincore-dev/miniscript-docker /src
+RUN git clone --branch v0.0.7 --depth 1 https://github.com/bitcoincore-dev/miniscript-docker /src
 RUN echo $(date +%s) > updated
 FROM clone as make
 WORKDIR /src

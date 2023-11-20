@@ -23,7 +23,7 @@ static bool run(std::string&& line, int64_t count) {
         assert(str);
 
         printf(
-				"\n{ \"X\":\"X\",\n\"total\":\"%17.10f\",\n\"script\":\"%5i\",\n\"miniscript\":\"%s\"\n }\n",
+				"\n{ \"X\":\"X\",\n\"total\":\"%17.10f\",\n\"scriptlen\":\"%5i\",\n\"miniscript\":\"%s\"\n }\n",
 				ret->ScriptSize() + avgcost, (int)ret->ScriptSize(),
 				Abbreviate(std::move(*str)).c_str()
 				);
