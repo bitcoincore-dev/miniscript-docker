@@ -16,4 +16,4 @@ wrapper.dot: wrapper.txt
 wrapper.pdf: wrapper.dot
 	dot -Tpdf <wrapper.dot >wrapper.pdf
 
-.PHONY:miniscript miniscript.js
+.PHONY:miniscript miniscript.js miniscript.json

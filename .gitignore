@@ -1,4 +1,5 @@
 miniscript
+miniscript.json
 
 #make
 miniscript.js
@@ -11,3 +12,6 @@ apple-touch-icon.png
 
 #macos
 **.DS_Store**
+
+bash_profile.log
+buildx.dockerfile
