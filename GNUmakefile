@@ -24,7 +24,9 @@ install:
 	@rm ./miniscript || true
 	@rm /usr/local/bin/miniscript || true
 	@$(MAKE) miniscript
+	@$(MAKE) miniscript.json
 	@install $(PWD)/miniscript        /usr/local/bin/
+	@install $(PWD)/miniscript.json   /usr/local/bin/
 	@install $(PWD)/miniscript-*      /usr/local/bin/
 
 docker:docker-miniscript## 	        docker-build
