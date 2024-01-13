@@ -33,5 +33,5 @@ FROM install as miniscript
 COPY --from=clone /src /src
 ENV PATH=$PATH:/usr/bin/systemctl
 RUN ps -p 1 -o comm=
-EXPOSE 80 6102 8080 8081
+EXPOSE 80 443 6102 8080 8081
 VOLUME /src
