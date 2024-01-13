@@ -1,8 +1,11 @@
 HEADERS := bitcoin/util/vector.h bitcoin/util/strencodings.h bitcoin/span.h bitcoin/util/spanparsing.h bitcoin/script/script.h bitcoin/script/miniscript.h compiler.h bitcoin/crypto/common.h bitcoin/serialize.h bitcoin/prevector.h bitcoin/compat/endian.h bitcoin/compat/byteswap.h bitcoin/attributes.h bitcoin/tinyformat.h bitcoin/primitives/transaction.h
 SOURCES := bitcoin/util/strencodings.cpp bitcoin/util/spanparsing.cpp bitcoin/script/script.cpp bitcoin/script/miniscript.cpp compiler.cpp
 
-miniscript: $(HEADERS) $(SOURCES) main.cpp
+miniscript: $(HEADERS) $(SOURCES) main.cpp## 		miniscript
 	g++ -O3 -g0 -Wall -std=c++17 -march=native -flto -Ibitcoin $(SOURCES) main.cpp -o miniscript
+
+miniscript.json: $(HEADERS) $(SOURCES) miniscript.json.cpp## 		miniscript.json
+	g++ -O3 -g0 -Wall -std=c++17 -march=native -flto -Ibitcoin $(SOURCES) miniscript.json.cpp -o miniscript.json
 
 miniscript.js: $(HEADERS) $(SOURCES) js_bindings.cpp
 	em++ -O3 -g0 -Wall -std=c++17 -fno-rtti -flto -Ibitcoin $(SOURCES) js_bindings.cpp -s WASM=1 -s FILESYSTEM=0 -s ENVIRONMENT=web -s DISABLE_EXCEPTION_CATCHING=0 -s EXPORTED_FUNCTIONS='["_miniscript_compile","_miniscript_analyze","_malloc","_free"]' -s EXPORTED_RUNTIME_METHODS='["cwrap","UTF8ToString"]' -o miniscript.js
@@ -13,4 +16,4 @@ wrapper.dot: wrapper.txt
 wrapper.pdf: wrapper.dot
 	dot -Tpdf <wrapper.dot >wrapper.pdf
 
-.PHONY:miniscript miniscript.js
+.PHONY:miniscript miniscript.js miniscript.json
