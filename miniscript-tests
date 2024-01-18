@@ -13,6 +13,7 @@ export MINISCRIPT_JSON
 ## etc..
 
 TESTS=$(echo miniscript-test-{0..100}*)
+#echo $TESTS
 
 ## echo $JQ
 
