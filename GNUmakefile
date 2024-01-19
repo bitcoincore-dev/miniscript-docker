@@ -62,6 +62,17 @@ docker-miniscript:docker-build## 		docker-miniscript
 miniscript-tests:## 		miniscript-tests
 	@bash $< $@ 2>/dev/null || true
 
+example-tests:## 		example-tests
+	@echo
+	@cat example1.miniscript  | miniscript && echo
+	@cat example2.miniscript  | miniscript && echo
+
+example-json-tests:## 		example-json-tests
+	@echo "{\"test\":\"test\"}" jq >/dev/null | jq || echo "install jq"
+	@echo "{\"test\": 0}" | jq >/dev/null || echo "install jq"
+	@cat example1.miniscript  | miniscript.json #| jq .miniscript | sed 's/\"//g' | miniscript
+	@cat example1.miniscript  | miniscript.json #| jq .miniscript | sed 's/\"//g' | miniscript
+
 example-commands:
 	@printf "$(DOCKER) run --rm -v $(PWD):/src --publish 8080:$(PORT)  miniscript sh -c \"make miniscript\"\n"
 	@printf "$(DOCKER) run --rm -v $(PWD):/src --publish 8080:$(PORT)  miniscript sh -c \"make install\"\n"
