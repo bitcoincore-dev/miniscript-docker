@@ -15,9 +15,20 @@ export DOCKER
 PWD=$(shell echo `pwd`)
 export PWD
 
+ifneq ($(port),)
+PORT                                   :=$(port)
+else
+PORT                                   :=8080
+endif
+export PORT
+
 -:
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?##/ {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
 -include Makefile
+
+submodules:## 		submodules
+	git submodule update --init --recursive
 
 .PHONY:install
 install:
@@ -45,15 +56,30 @@ docker-buildx:## 		docker buildx build sequence
 	@$(DOCKER) buildx build -t miniscript --platform linux/$(TARGET) . --load
 docker-miniscript:docker-build## 		docker-miniscript
 	@[[ -z "$(shell file ./miniscript | grep inux)" ]] && echo "not linux" && rm ./miniscript || echo "miniscript is built for linux"
-	@$(DOCKER) run --rm -v $(PWD):/src --publish 80:8080  miniscript sh -c "make install"
+	@$(DOCKER) run --rm -v $(PWD):/src --publish 8080:$(PORT)  miniscript sh -c "make install"
 
 .PHONY:miniscript-tests
-miniscript-tests:## 	miniscript-tests
+miniscript-tests:## 		miniscript-tests
 	@bash $< $@ 2>/dev/null || true
 
+example-tests:## 		example-tests
+	@echo
+	@cat example1.miniscript  | miniscript && echo
+	@cat example2.miniscript  | miniscript && echo
+
+example-json-tests:## 		example-json-tests
+	@echo "{\"test\":\"test\"}" jq >/dev/null | jq || echo "install jq"
+	@echo "{\"test\": 0}" | jq >/dev/null || echo "install jq"
+	@cat example1.miniscript  | miniscript.json #| jq .miniscript | sed 's/\"//g' | miniscript
+	@cat example1.miniscript  | miniscript.json #| jq .miniscript | sed 's/\"//g' | miniscript
+
 example-commands:
+	@printf "$(DOCKER) run --rm -v $(PWD):/src --publish 8080:$(PORT)  miniscript sh -c \"make miniscript\"\n"
+	@printf "$(DOCKER) run --rm -v $(PWD):/src --publish 8080:$(PORT)  miniscript sh -c \"make install\"\n"
+	@printf "$(DOCKER) run --rm -v $(PWD):/src --publish 8080:$(PORT)  miniscript sh -c \"which miniscript\"\n"
+	@printf "$(DOCKER) run --rm -v $(PWD):/src --publish 8080:$(PORT)  miniscript sh -c \"make miniscript.js\"\n"
 	@printf "\n"
-	@printf "./docker-miniscript \"make miniscript >/dev/null && ls\""
+	@printf "./miniscript-docker \"make miniscript >/dev/null && ls\""
 	@printf "\n"
 	@printf "./docker-miniscript \"make miniscript >/dev/null && cat 1.miniscript | ./miniscript\""
 	@printf "\n"

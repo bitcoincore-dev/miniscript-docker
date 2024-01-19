@@ -132,9 +132,9 @@ function help {
     printf "\n"
     printf "  miniscript-docker shell\n"
     printf "\n"
-    printf "  PORT=6102 miniscript-docker serve\n"
-    printf "\n"
     printf "  miniscript-docker run '<miniscript>'"
+    printf "\n"
+    printf "  PORT=80 miniscript-docker serve\n"
     printf "\n"
     exit;
 }

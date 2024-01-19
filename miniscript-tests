@@ -1,13 +1,40 @@
 #!/usr/bin/env bash
+#
+JQ=$(which jq)
+MINISCRIPT_JSON=$(which miniscript.json)
+export MINISCRIPT_JSON
 
 [[ -z "$(command -v miniscript-tests)" ]] && \
         install $0 /usr/local/bin || true
-## add your won tests
+
+## add your own tests
 ## miniscript-test-0
-## miniscript-test-1000
+## miniscript-test-100
 ## etc..
 
-TESTS=$(echo miniscript-test-{0..1000}*)
+TESTS=$(echo miniscript-test-{0..100}*)
+#echo $TESTS
+
+## echo $JQ
+
+if [[ ! -z $JQ ]];then
+
+    ## echo $JQ
+
+    if [[ "$1" == "--json" ]] || [[ "$1" == "-j" ]]; then
+
+        JSON_TESTS=$(echo miniscript.json-test-{0..100}*)
+
+        ## echo $JSON_TESTS;
+        for ms in $JSON_TESTS
+        do
+            . $ms 2>/dev/null || true
+        done
+        exit;
+
+    fi
+fi
+
 for ms in $TESTS
 do
     . $ms 2>/dev/null
