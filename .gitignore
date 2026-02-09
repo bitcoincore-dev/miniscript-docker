@@ -15,3 +15,6 @@ apple-touch-icon.png
 
 bash_profile.log
 buildx.dockerfile
+
+#genkit
+.genkit/
