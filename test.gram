@@ -29,6 +29,7 @@ t45 = w1 "," s4;
 t55 = s5;
 
 s = "pk(C)" |
+    "do_nothing()" |
     "and(" (t12 | t22) ")" |
     "or(" prob s "," prob s ")" |
     "thresh(2," (t23 | t33) ")" |
