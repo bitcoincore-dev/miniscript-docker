@@ -333,6 +333,9 @@ const Strat* ComputeStrategy(const Policy& node, std::unordered_map<const Policy
             strats.push_back(MakeStrat(store, Strat::Type::THRESH, subs, node.k, (double)node.k / subs.size()));
             break;
         }
+        case Policy::Type::DO_NOTHING:
+            strats.push_back(MakeStrat(store, Strat::Type::JUST_1));
+            break;
     }
 
     if (strats.size() != 1) {
@@ -498,6 +501,7 @@ CostPair CalcCostPair(Fragment nt, const std::vector<const Result*>& s, double l
         case Fragment::WRAP_J: return {s[0]->pair.sat, 1};
         case Fragment::JUST_1: return {0, INF};
         case Fragment::JUST_0: return {INF, 0};
+        case Fragment::DO_NOTHING: return {0, INF};
         case Fragment::AND_V: return {s[0]->pair.sat + s[1]->pair.sat, INF};
         case Fragment::AND_B: return {s[0]->pair.sat + s[1]->pair.sat, s[0]->pair.nsat + s[1]->pair.nsat};
         case Fragment::OR_B:
@@ -604,6 +608,7 @@ const TypeFilters& GetTypeFilter(Fragment nt) {
         case Fragment::HASH160:
         case Fragment::SHA256:
         case Fragment::RIPEMD160:
+        case Fragment::DO_NOTHING:
             return FILTER_NO;
         case Fragment::WRAP_A: return FILTER_WRAP_A;
         case Fragment::WRAP_S: return FILTER_WRAP_S;
@@ -710,6 +715,9 @@ void Compile(const Strat* strat, Compilation& compilation, std::map<CompilationK
             Add(compilation, cache, Fragment::JUST_0, strat->sub, 0, 0);
             return;
         case Strat::Type::JUST_1:
+            Add(compilation, cache, Fragment::JUST_1, strat->sub, 0, 0);
+            return;
+        case Strat::Type::DO_NOTHING:
             Add(compilation, cache, Fragment::JUST_1, strat->sub, 0, 0);
             return;
         case Strat::Type::AFTER:
