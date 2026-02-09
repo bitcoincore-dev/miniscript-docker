@@ -591,6 +591,7 @@ public:
                 case Fragment::WRAP_J: return BuildScript(OP_SIZE, OP_0NOTEQUAL, OP_IF, subs[0], OP_ENDIF);
                 case Fragment::WRAP_N: return BuildScript(std::move(subs[0]), OP_0NOTEQUAL);
                 case Fragment::JUST_1: return BuildScript(OP_1);
+                case Fragment::DO_NOTHING: return BuildScript(OP_1);
                 case Fragment::JUST_0: return BuildScript(OP_0);
                 case Fragment::AND_V: return BuildScript(std::move(subs[0]), subs[1]);
                 case Fragment::AND_B: return BuildScript(std::move(subs[0]), subs[1], OP_BOOLAND);
@@ -688,6 +689,7 @@ public:
                 case Fragment::RIPEMD160: return std::move(ret) + "ripemd160(" + HexStr(node.data) + ")";
                 case Fragment::JUST_1: return std::move(ret) + "1";
                 case Fragment::JUST_0: return std::move(ret) + "0";
+                case Fragment::DO_NOTHING: return std::move(ret) + "do_nothing()";
                 case Fragment::AND_V: return std::move(ret) + "and_v(" + std::move(subs[0]) + "," + std::move(subs[1]) + ")";
                 case Fragment::AND_B: return std::move(ret) + "and_b(" + std::move(subs[0]) + "," + std::move(subs[1]) + ")";
                 case Fragment::OR_B: return std::move(ret) + "or_b(" + std::move(subs[0]) + "," + std::move(subs[1]) + ")";
@@ -727,6 +729,7 @@ private:
         switch (fragment) {
             case Fragment::JUST_1: return {0, 0, {}};
             case Fragment::JUST_0: return {0, {}, 0};
+            case Fragment::DO_NOTHING: return {0, 0, {}};
             case Fragment::PK_K: return {0, 0, 0};
             case Fragment::PK_H: return {3, 0, 0};
             case Fragment::OLDER:
@@ -799,6 +802,7 @@ private:
     internal::StackSize CalcStackSize() const {
         switch (fragment) {
             case Fragment::JUST_0: return {{}, 0};
+            case Fragment::DO_NOTHING:
             case Fragment::JUST_1:
             case Fragment::OLDER:
             case Fragment::AFTER: return {0, {}};
@@ -1014,6 +1018,7 @@ private:
                     return {INVALID, std::move(x.sat)};
                 }
                 case Fragment::JUST_0: return {EMPTY, INVALID};
+                case Fragment::DO_NOTHING: return {INVALID, EMPTY};
                 case Fragment::JUST_1: return {INVALID, EMPTY};
             }
             assert(false);
@@ -1168,6 +1173,7 @@ public:
             switch (node.fragment) {
                 case Fragment::JUST_0:
                     return false;
+                case Fragment::DO_NOTHING:
                 case Fragment::JUST_1:
                     return true;
                 case Fragment::PK_K:
